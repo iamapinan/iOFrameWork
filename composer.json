@@ -33,6 +33,13 @@
         "filp/whoops": "2.1.14",
         "maximebf/consolekit": ">=1.0.0"
     },
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/",
+            "controllers\\": "controllers/",
+            "\\": ""
+        }
+    },
     "support": {
         "email": "developer@iotech.co.th"
     }

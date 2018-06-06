@@ -31,3 +31,19 @@ function register_func_alias($target, $original) {
 function to_json_respose($data = []) {
     return json_encode($data);
 } 
+
+function array_unset_recursive(&$array, $remove) {
+
+    foreach ($array as $key => &$value) {
+        if (in_array($value, $remove)) unset($array[$key]);
+        else if (is_array($value)) {
+            array_unset_recursive($value, $remove);
+        }
+    }
+
+}
+
+function redirect_me($uri = null) {
+    $uri = ($uri == null) ? app('request')->path() : $uri;
+    header("location: ". $uri);
+}
