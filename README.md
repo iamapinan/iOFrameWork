@@ -20,4 +20,3 @@ Easy to use and bug less mvc model framework but powerful to use.
 by iOTech <https://iotech.co.th>
 
 ![iotech](https://iotech.co.th/wp-content/uploads/2018/01/cropped-Group-12-1.png)
-git 
