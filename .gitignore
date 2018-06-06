@@ -9,10 +9,12 @@ composer.phar
 .env
 node_modules/
 npm-debug.log
-cache/*
+cache/
+.cache/
+.config/
+.local/
 
+### Local ###
 .gitconfig
 .vscode/
-
-.gitconfig
 .viminfo
