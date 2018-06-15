@@ -3,7 +3,7 @@
  * Define constants
  */
 define('DS', DIRECTORY_SEPARATOR, true);
-define('BASE_PATH', __DIR__ . DS . '..' . DS, TRUE);
+define('BASE_PATH', str_replace('/boot', '', __DIR__) . DS, TRUE);
 
 /**
  * iO Framework Loader
@@ -34,7 +34,6 @@ foreach ($fnc as $fn => $fv) {
  * Load all route.
  */
 require ('RouteLoader.php');
-
 
 if( getenv('environment') == 'dev' ) {
     /**

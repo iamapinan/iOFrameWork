@@ -9,8 +9,7 @@ composer.phar
 .env
 node_modules/
 npm-debug.log
-cache/
-.cache/
+.cache/view/*
 .config/
 .local/
 
