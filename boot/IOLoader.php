@@ -20,12 +20,12 @@ $dotenv->load();
 /**
  * System constant.
  */
-require ('../app/Constants.php');
+require ('../App/Constants.php');
 
 /**
  * Register function to alias.
  */
-require ('../app/Functions.php');
+require ('../App/Functions.php');
 foreach ($fnc as $fn => $fv) {
     register_func_alias($fn, $fv);
 }

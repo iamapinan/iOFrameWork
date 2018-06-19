@@ -1,5 +1,5 @@
 <?php
-namespace app;
+namespace App;
 use Medoo\Medoo;
 
 class dbClient {
@@ -34,6 +34,3 @@ class dbClient {
         return $this->connect;
     }
 }
-
-use app\dbClient;
-$db = new dbClient;
