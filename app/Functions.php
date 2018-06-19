@@ -28,7 +28,9 @@ function register_func_alias($target, $original) {
     eval("function $target() { \$args = func_get_args(); return call_user_func_array('$original', \$args); }");
 }
 
-function to_json_respose($data = []) {
+function to_json_respose($data = [], $return_code = 200) {
+    header('Content-Type: application/json');
+    http_response_code($return_code);
     return json_encode($data);
 } 
 

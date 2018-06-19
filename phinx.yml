@@ -5,27 +5,9 @@ paths:
 environments:
     default_migration_table: phinxlog
     default_database: development
-    production:
-        adapter: mysql
-        host: localhost
-        name: gbox
-        user: root
-        pass: 'v4boyomN'
-        port: 3306
-        charset: utf8
-
     development:
         adapter: mysql
-        host: localhost
-        name: gbox_db
-        user: root
-        pass: 'v4boyomN'
-        port: 3306
-        charset: utf8
-
-    testing:
-        adapter: mysql
-        host: localhost
+        host: 172.17.0.3
         name: gbox_db
         user: root
         pass: 'v4boyomN'

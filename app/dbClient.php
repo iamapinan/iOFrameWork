@@ -4,7 +4,7 @@ use Medoo\Medoo;
 
 class dbClient {
     var $connect = '';
-    function __construct() {
+    public function __construct() {
         $this->connect = new Medoo([
             'database_type' => getconst('default_database'),
             'database_name' => getenv('mysql_database_name'),
@@ -14,23 +14,23 @@ class dbClient {
         ]);
     }
 
-    function select($tb, $f = array(), $cond = array()) {
+    public function select($tb, $f = array(), $cond = array()) {
         return $this->connect->select($tb, $f, $cond);
     }
 
-    function insert($tb, $data) {
+    public function insert($tb, $data) {
         return $this->connect->insert($tb, $data);
     }
 
-    function update($tb, $data, $cond = array()) {
+    public function update($tb, $data, $cond = array()) {
         return $this->connect->update($tb, $data, $cond);
     }
 
-    function delete($tb, $cond) {
+    public function delete($tb, $cond) {
         return $this->connect->delete($tb, $cond);
     }
 
-    function exec() {
+    public function exec() {
         return $this->connect;
     }
 }

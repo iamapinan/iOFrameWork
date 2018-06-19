@@ -8,6 +8,6 @@ $route->group(getconst('api_prefix'), function() {
         echo json(this());
     });
 
-    $this->get_post('/login', 'App\Controllers\LoginControllers@login');
+    $this->controller('/authen', 'App\Controllers\AuthenControllers');
 
 });
