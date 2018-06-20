@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 use \App\dbClient;
 use \App\MiddleWare\Authenticate;
-
+use \App\MiddleWare\BasicAuthen;
 class AuthenControllers{
     private $obj = [];
 
@@ -19,6 +19,11 @@ class AuthenControllers{
         $Authen = new Authenticate;
         $res = $Authen->VerifyUser(req('username'), base64_decode( req('password') ));
         echo json($res);
+    }
+
+    public function getIndex() {
+        $basic = new BasicAuthen;
+        $basic->Basic();
     }
 
     /**

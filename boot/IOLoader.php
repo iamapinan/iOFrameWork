@@ -17,6 +17,25 @@ require (BASE_PATH . 'vendor/autoload.php');
 $dotenv = new Dotenv\Dotenv(BASE_PATH);
 $dotenv->load();
 
+if( getenv('environment') == 'development' ) {
+    /**
+     * Show errors
+     */
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
+    /**
+     * Error handle
+     */
+    $whoops = new \Whoops\Run;
+    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+    $whoops->register();
+
+} else {
+    ini_set('display_errors', 0);
+    ini_set('display_startup_errors', 0);
+}
+
 /**
  * System constant.
  */
@@ -35,22 +54,3 @@ foreach ($fnc as $fn => $fv) {
  */
 require ('RouteLoader.php');
 
-if( getenv('environment') == 'dev' ) {
-    /**
-     * Show errors
-     */
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
-    /**
-     * Error handle
-     */
-    $whoops = new \Whoops\Run;
-    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-    $whoops->register();
-
-} else {
-    ini_set('display_errors', 0);
-    ini_set('display_startup_errors', 0);
-}
