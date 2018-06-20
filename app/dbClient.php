@@ -18,6 +18,12 @@ class dbClient {
         return $this->connect->select($tb, $f, $cond);
     }
 
+    public function selectOne($tb, $f = array(), $cond = array()) {
+        $cond['LIMIT'] = [0,1];
+        $res = $this->select($tb, $f, $cond);
+        return $res[0];
+    }
+
     public function insert($tb, $data) {
         return $this->connect->insert($tb, $data);
     }

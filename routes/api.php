@@ -9,5 +9,5 @@ $route->group(getconst('api_prefix'), function() {
     });
 
     $this->controller('/authen', 'App\Controllers\AuthenControllers');
-
+    $this->controller('/license', 'App\Controllers\KeyControllers');
 });

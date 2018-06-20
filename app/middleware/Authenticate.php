@@ -10,7 +10,7 @@ class Authenticate extends \App\dbClient {
             ["username" => $User]
         );
 
-        if(password_verify($Pass, $SelectUser[0]['password'])) {
+        if(!isset($SelectUser[0]['password']) && password_verify($Pass, $SelectUser[0]['password'])) {
             unset($SelectUser[0]['password']);
             $result = [
                 "status" => "success",

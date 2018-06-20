@@ -34,9 +34,11 @@ class AuthenControllers{
             echo json($res, 401);
         }
     }
-
+    /**
+     * REST API Default
+     */
     public function getIndex() {
-
+        echo json(["code" => 404, "status" => 'API not found'], 404);
     }
 
     /**
@@ -74,7 +76,21 @@ class AuthenControllers{
     /**
      * Reset Password
      */
+    public function postReset() {
+        /**
+         * Validate email from request and send password reset link to user email.
+         */
 
+         $usr = $this->db->selectOne('users', ["email"], ["username" => req('email')]);
+         if($usr['email'] != null) {
+            // Send reset email.
+            echo json($usr);
+         }
+    }
+
+    public function keyVerfiy($key) {
+        
+    }
 
 
 }
