@@ -10,7 +10,8 @@ class dbClient {
             'database_name' => getenv('mysql_database_name'),
             'server' => getenv('mysql_host'),
             'username' => getenv('mysql_user'),
-            'password' => getenv('mysql_password')
+            'password' => getenv('mysql_password'),
+            'charset' => 'utf8'
         ]);
     }
 
