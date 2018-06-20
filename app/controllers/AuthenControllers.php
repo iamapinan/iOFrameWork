@@ -23,7 +23,8 @@ class AuthenControllers{
 
     public function postIndex(){
         $Authen = new Authenticate;
-        $res = $Authen->VerifyUser(req('username'), base64_decode( req('password') ));
+       
+        $res = $Authen->VerifyUser(req('username'), req('password'));
         if($res != false) {
             echo json($res, 200);
         } else {
@@ -49,14 +50,14 @@ class AuthenControllers{
 
         $data = [
             "username" => req('email'),
-            "password" => $this->Encode(base64_decode(req('password'))),
+            "password" => $this->Encode(req('password')),
             "email" => req('email'),
             "first_name" => req('first_name'),
             "last_name" => req('last_name'),
             "school_id" => 0,
             "role_id" => 2
         ];
-
+        // echo json($data);
         $this->db->insert("users", $data);
         if($this->db->exec()->id() != 0) {
             unset($data['password']);
@@ -89,7 +90,7 @@ class AuthenControllers{
     }
 
     public function keyVerfiy($key) {
-        
+
     }
 
 
