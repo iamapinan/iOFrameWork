@@ -39,12 +39,12 @@ if( getenv('environment') == 'development' ) {
 /**
  * System constant.
  */
-require ('../App/Constants.php');
+require ('../app/Constants.php');
 
 /**
  * Register function to alias.
  */
-require ('../App/Functions.php');
+require ('../app/Functions.php');
 foreach ($fnc as $fn => $fv) {
     register_func_alias($fn, $fv);
 }
