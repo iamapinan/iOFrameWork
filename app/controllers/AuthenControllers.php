@@ -9,6 +9,8 @@ class AuthenControllers{
 
     public function __construct() {
         $this->db = new dbClient;
+        $basic = new BasicAuthen;
+        $basic->Check();
     }
 
     public function getEncode($password) {
@@ -22,8 +24,7 @@ class AuthenControllers{
     }
 
     public function getIndex() {
-        $basic = new BasicAuthen;
-        $basic->Basic();
+
     }
 
     /**
