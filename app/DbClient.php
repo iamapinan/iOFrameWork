@@ -2,7 +2,7 @@
 namespace app;
 use Medoo\Medoo;
 
-class dbClient {
+class DbClient {
     var $connect = '';
     function __construct() {
         $this->connect = new Medoo([
