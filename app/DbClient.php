@@ -1,39 +1,37 @@
 <?php
-namespace app;
+namespace App;
 use Medoo\Medoo;
 
 class DbClient {
     var $connect = '';
-    function __construct() {
+    public function __construct() {
         $this->connect = new Medoo([
             'database_type' => getconst('default_database'),
             'database_name' => getenv('mysql_database_name'),
             'server' => getenv('mysql_host'),
             'username' => getenv('mysql_user'),
-            'password' => getenv('mysql_password')
+            'password' => getenv('mysql_password'),
+            'charset' => 'utf8'
         ]);
     }
 
-    function select($tb, $f = array(), $cond = array()) {
+    public function select($tb, $f = array(), $cond = array()) {
         return $this->connect->select($tb, $f, $cond);
     }
 
-    function insert($tb, $data) {
+    public function insert($tb, $data) {
         return $this->connect->insert($tb, $data);
     }
 
-    function update($tb, $data, $cond = array()) {
+    public function update($tb, $data, $cond = array()) {
         return $this->connect->update($tb, $data, $cond);
     }
 
-    function delete($tb, $cond) {
+    public function delete($tb, $cond) {
         return $this->connect->delete($tb, $cond);
     }
 
-    function exec() {
+    public function exec() {
         return $this->connect;
     }
 }
-
-use app\dbClient;
-$db = new dbClient;
