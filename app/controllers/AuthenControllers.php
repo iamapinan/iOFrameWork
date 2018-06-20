@@ -20,7 +20,15 @@ class AuthenControllers{
     public function postIndex(){
         $Authen = new Authenticate;
         $res = $Authen->VerifyUser(req('username'), base64_decode( req('password') ));
-        echo json($res);
+        if($res != false) {
+            echo json($res, 200);
+        } else {
+            $res = [
+                "status" => "error",
+                "msg" => "บัญชีผู้หรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบ"
+            ];
+            echo json($res, 401);
+        }
     }
 
     public function getIndex() {
