@@ -22,8 +22,4 @@ class Authenticate extends \App\dbClient {
         }
     }
 
-    public static function EncPassword($pass) {
-       return password_hash($pass, PASSWORD_BCRYPT);
-    }
-
 }

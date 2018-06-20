@@ -14,7 +14,11 @@ class AuthenControllers{
     }
 
     public function getEncode($password) {
-        echo password_hash($password, PASSWORD_BCRYPT);
+        echo $this->Encode($password);
+    }
+
+    public function Encode($password) {
+        return password_hash($password, PASSWORD_BCRYPT);
     }
 
     public function postIndex(){
@@ -43,7 +47,7 @@ class AuthenControllers{
 
         $data = [
             "username" => req('email'),
-            "password" => Authenticate::EncPassword(base64_decode(('password'))),
+            "password" => $this->Encode(base64_decode(req('password'))),
             "email" => req('email'),
             "first_name" => req('first_name'),
             "last_name" => req('last_name'),
