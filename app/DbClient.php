@@ -49,7 +49,9 @@ class DbClient {
         //========== Where ==========
         $condlimit = $cond;
         //========== Order by ==========
-        $condlimit["ORDER"] = $orderBy;
+        if (count($orderBy)!= 0){
+            $condlimit["ORDER"] = $orderBy;
+        }
         //========== Limit ==========
         if($page == 1){
             $condlimit["LIMIT"] = [0,$paginationSize];
@@ -64,7 +66,7 @@ class DbClient {
 
         //==========
         $pageNext = $page+1;
-        $pagePrev = $pageNext-1;
+        $pagePrev = $page-1;
         //==========
         $res = [
             "total" => $count,
@@ -74,7 +76,7 @@ class DbClient {
             "first_page_url" => getenv("domain").this()->path."?page=1",
             "last_page_url" => getenv("domain").this()->path."?page=".$pageCount,
             "next_page_url" => $pageNext <= $pageCount ?getenv("domain").this()->path."?page=".$pageNext : null,
-            "prev_page_url" => $pagePrev == 1 ? null :getenv("domain").this()->path."?page=".$pagePrev,
+            "prev_page_url" => $page == 1 ? null :getenv("domain").this()->path."?page=".$pagePrev,
             "path" => getenv("domain"),
             "data" => $data
         ];
