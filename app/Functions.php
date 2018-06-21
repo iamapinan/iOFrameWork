@@ -65,3 +65,12 @@ function encap_data($data = null, $status = 'success', $message= ''){
         'data' => $data ,
     ];
 }
+
+function array_key_by($array = [], $key){
+    $new_array = [];
+    foreach ($array as $member) {
+        $new_key = $member[$key];
+        $new_array[$new_key] = $member ;
+    }
+    return $new_array ;
+}
