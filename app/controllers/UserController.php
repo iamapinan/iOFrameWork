@@ -1,11 +1,13 @@
 <?php
 namespace App\Controllers;
 
+use \App\MiddleWare\BasicAuthen;
 
 class UserController {
 
     public function __construct() {
-
+        $basic = new BasicAuthen;
+        $basic->Check();
     }
 
     public function getCoursebyUserId($user_id){

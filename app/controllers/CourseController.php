@@ -1,10 +1,12 @@
 <?php
 namespace App\Controllers;
+use \App\MiddleWare\BasicAuthen;
 
 class CourseController {
 
     public function __construct() {
-
+        $basic = new BasicAuthen;
+        $basic->Check();
     }
 
     public function submitCourse($id){
