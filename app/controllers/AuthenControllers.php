@@ -24,8 +24,17 @@ class AuthenControllers{
     public function postIndex(){
         $Authen = new Authenticate;
        
-        $res = $Authen->VerifyUser(req('username'), req('password'));
-        if($res != false) {
+        $ret = $Authen->VerifyUser(req('username'), req('password'));
+        if($ret == true) {
+            $user_data = $this->db->selectOne(
+                "users", 
+                ["id", "username", "email", "first_name", "last_name", "school_id", "role_id(role)"], 
+                ["username" => req('username')]
+            );
+            $res = [
+                "status" => "success",
+                "data" => $user_data
+            ];
             echo json($res, 200);
         } else {
             $res = [
