@@ -7,6 +7,7 @@ use \App\MiddleWare\BasicAuthen;
 
 class GradeControllers{
     private $obj = [];
+    private $db;
 
     public function __construct() {
         $this->db = new dbClient;
@@ -26,8 +27,9 @@ class GradeControllers{
     public function postClassroom() {
         if(!empty(req('grade')) && !empty(req('email')) && !empty(req('classNumber'))) {
             $user = $this->db->selectOne('users', ['id(user_id)', 'school_id'], ['username' => req('email')]);
-
+            $grade = $this->db->selectone("educations", ["name"], ["id" => req('grade')]);
             $data = [
+                "title" => $grade["name"] .'/'. req('classNumber'),
                 "user_id" => $user['user_id'],
                 "grade" => req('grade'),
                 "class" => req('classNumber'),

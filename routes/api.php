@@ -11,4 +11,5 @@ $route->group(getconst('api_prefix'), function() {
     $this->controller('/authen', 'App\Controllers\AuthenControllers');
     $this->controller('/license', 'App\Controllers\KeyControllers');
     $this->controller('/grade', 'App\Controllers\GradeControllers');
+    $this->controller('/chat', 'App\Controllers\ChatControllers');
 });
