@@ -15,6 +15,9 @@ class ArticleControllers{
         $basic->Check();
     }
 
+    public function getList($schoolid) {
+        $res = $this->db->pagination("article_data", ['id', 'title', 'uid', 'school_id', 'image', 'timestamp'], ["school_id" => $schoolid], ["id" => "DESC"], 10);
 
-
+        echo json($res);
+    }
 }

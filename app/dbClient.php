@@ -40,17 +40,14 @@ class dbClient {
     public function exec() {
         return $this->connect;
     }
-    
+
     public function pagination($tb, $f = array(), $cond = array(), $orderBy = array(),$paginationSize = 10) {
         //(ชื่อตาราง,ฟิวที่ต้องการแสดง,เรียงข้อมูล,จำนวนการแสดง)
-        $parameterGet = this()->query;
-        $parameterPost = this()->body;
-
-        if($parameterGet["page"] == null || $parameterGet["page"] == ""){
-            $page = 1;
-        }else{
-            $page = $parameterGet["page"];
-        }
+        // if(req("page") == ''){
+        // }else{
+        //     $page = req("page");
+        // }
+        $page = @(!empty(req('page'))) ? req('page') : 1;
 
         //========== Where ==========
         $condlimit = $cond;
@@ -64,10 +61,11 @@ class dbClient {
         }
         //========== Query data ==========
         $data = $this->connect->select($tb, $f, $condlimit);
+        
         //========== Query count data ==========
         $count = $this->connect->count($tb,$cond);
         $pageCount = ceil($count/$paginationSize);
-
+    
         //==========
         $pageNext = $page+1;
         $pagePrev = $pageNext-1;
