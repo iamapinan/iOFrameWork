@@ -20,4 +20,10 @@ class ArticleControllers{
 
         echo json($res);
     }
+
+    public function getData($id) {
+        $res = $this->db->selectOne("article_data", ['id', 'title', 'description', 'uid', 'school_id', 'image', 'timestamp'], ["id" => $id]);
+        $res['timestamp'] = ($res['timestamp'] != null) ? date('d/m/Y H:i', $res['timestamp']) : time();
+        echo json($res);
+    }
 }
