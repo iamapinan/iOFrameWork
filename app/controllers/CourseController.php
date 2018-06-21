@@ -7,7 +7,7 @@ class CourseController {
 
     }
 
-    public function submitCourse($c_id){
+    public function submitCourse($id){
         $db = new \App\DbClient() ;
         $db->update('course_register',[
             'status'=> 'done'
