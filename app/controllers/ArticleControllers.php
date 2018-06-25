@@ -17,14 +17,27 @@ class ArticleControllers{
     }
 
     public function getList($schoolid) {
-        // $res = $this->db->pagination("article_data", ['id', 'title', 'uid', 'school_id', 'image', 'timestamp'], ["school_id" => $schoolid], ["id" => "DESC"], 10);
+        $search = '';
+        if(!empty(this()->query['q'])) {
+            $search = [
+                        "MATCH" => [
+                                    
+                                    "columns" => ["article_data.description", "article_data.title"],
+                                    "keyword" => req('q'),
+                                    "mode" => "natural"
+                        ],
+                        "article_data.school_id" => $schoolid
+                        ];
+        } else {
+            $search = ["article_data.school_id" => $schoolid];
+        }
+        
         $res = $this->db->PaginationMulti("article_data", [
             "[>]users" => ["uid" => "id"]], 
             ['article_data.id', 'article_data.title', 'article_data.description'
             , 'article_data.uid', 'article_data.school_id', 'article_data.image'
             , 'article_data.timestamp', 'users.first_name', 'users.last_name'
-            , 'users.last_name'], 
-            ["article_data.school_id" => $schoolid], ["article_data.id" => "DESC"], 30);
+            , 'users.last_name'], $search, ["article_data.id" => "DESC"], 30);
         echo json($res);
     }
 

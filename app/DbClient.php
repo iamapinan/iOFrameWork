@@ -57,7 +57,7 @@ class DbClient {
 
         //========== Query data ==========
         $data = $this->connect->select($tb, $join, $f, $condlimit);
-        
+ 
         //========== Query count data ==========
         $count = $this->connect->count($tb,$cond);
         $pageCount = ceil($count/$paginationSize);
