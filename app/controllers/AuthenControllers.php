@@ -1,14 +1,14 @@
 <?php
 namespace App\Controllers;
 
-use \App\dbClient;
+use \App\DbClient;
 use \App\MiddleWare\Authenticate;
 use \App\MiddleWare\BasicAuthen;
 class AuthenControllers{
     private $obj = [];
 
     public function __construct() {
-        $this->db = new dbClient;
+        $this->db = new DbClient;
         $basic = new BasicAuthen;
         $basic->Check();
     }

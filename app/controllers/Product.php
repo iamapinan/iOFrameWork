@@ -1,12 +1,12 @@
 <?php
-namespace controllers;
+namespace App\Controllers;
 
-use app\dbClient;
+use app\DbClient;
 
 class Product {
     var $connect = '';
     public function __construct() {
-        $this->connect = new dbClient;
+        $this->connect = new DbClient;
     }
 
     public function get_product() {
