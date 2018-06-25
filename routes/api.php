@@ -1,24 +1,27 @@
 <?php
+    $tables = [
+        'courses' => 'tb4_course',
+        'testing' => 'tb7_testing'
+    ];
 /**
  * API Route
  */
 
 $route->group(getconst('api_prefix'), function() {
-    $this->get('/test', function () {
-        echo json(this());
-    });
 
-    $this->get('courses/{id}', function($id){
+    $this->post('courses', 'App\Controllers\CourseController@registerCourse');
+    $this->put('courses/?/testing/?', 'App\Controllers\CourseController@sendAnswer');
+    // get courses regitered by user_id 
+    $this->get('users/?/courses', 'App\Controllers\UserController@getCoursebyUserId');
+    // end course
+    $this->put('courses/{id}/submit', 'App\Controllers\CourseController@submitCourse'); 
 
-        // echo $id ;/
-        $db = new dbClient() ;
-        $res = $db->select("tb7_testing", ['*'], [
-            'tb4_course_f4_id[=]' => $id
-        ]);
-
-        echo json($res) ;
-    });
-
+    $this->controller('/authen', 'App\Controllers\AuthenControllers');
+    $this->controller('/license', 'App\Controllers\KeyControllers');
+    $this->controller('/grade', 'App\Controllers\GradeControllers');
+    $this->controller('/chat', 'App\Controllers\ChatControllers');
+    $this->controller('/article', 'App\Controllers\ArticleControllers');
+    
     $this->group('u', function(){
         $this->get('info', function(){
             echo json_encode([
@@ -31,5 +34,4 @@ $route->group(getconst('api_prefix'), function() {
             ]);
         });
     });
-
 });
