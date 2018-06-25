@@ -4,6 +4,7 @@ namespace App\Controllers;
 use \App\DbClient;
 use \App\MiddleWare\Authenticate;
 use \App\MiddleWare\BasicAuthen;
+use \App\MiddleWare\UploadFile;
 
 class ArticleControllers{
     private $obj = [];
@@ -33,14 +34,29 @@ class ArticleControllers{
         echo json($res);
     }
 
+    public function postUploadtest() {
+        $upload = new UploadFile;
+        $upload->file = this()->body['image'];
+        $upload->dest = BASE_PATH . '/public/store/article_file/';
+        $result = $upload->upload_base64();
+
+        echo json($result);
+    }
+
     public function postAdd() {
         $school = $this->db->selectOne("users", ['school_id'], ["id" => req('userid')]);
+
+        $upload = new UploadFile;
+        $upload->file = req('image');
+        $upload->dest = BASE_PATH . '/public/store/article_file/';
+        $upload_result = $upload->upload_base64();
+
         $data = [
             "title" => req('title'),
             "description" => req("description"),
             "uid" => req('userid'),
             "school_id" => $school['school_id'],
-            "image" => "https://picsum.photos/200/300",
+            "image" => getenv('domain') . '/store/article_file/' .$upload_result['basename'],
             "timestamp" => time()
         ];
         $this->db->insert("article_data", $data);
