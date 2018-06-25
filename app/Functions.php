@@ -20,6 +20,14 @@ function all_request($req) {
     }
 }
 
+function request(){
+    if(app('request')->method == 'GET'){
+        return app('request')->query;
+    } else {
+        return app('request')->body;
+    }
+}
+
 function app_request() {
     return app('request');
 }
@@ -48,4 +56,21 @@ function array_unset_recursive(&$array, $remove) {
 function redirect_me($uri = null) {
     $uri = ($uri == null) ? app('request')->path() : $uri;
     header("location: ". $uri);
+}
+
+function encap_data($data = null, $status = 'success', $message= ''){
+    return [
+        'status' => $status,
+        'message' => $message,
+        'data' => $data ,
+    ];
+}
+
+function array_key_by($array = [], $key){
+    $new_array = [];
+    foreach ($array as $member) {
+        $new_key = $member[$key];
+        $new_array[$new_key] = $member ;
+    }
+    return $new_array ;
 }
