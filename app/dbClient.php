@@ -42,11 +42,6 @@ class dbClient {
     }
 
     public function pagination($tb, $f = array(), $cond = array(), $orderBy = array(),$paginationSize = 10) {
-        //(ชื่อตาราง,ฟิวที่ต้องการแสดง,เรียงข้อมูล,จำนวนการแสดง)
-        // if(req("page") == ''){
-        // }else{
-        //     $page = req("page");
-        // }
         $page = @(!empty(req('page'))) ? req('page') : 1;
 
         //========== Where ==========
@@ -68,7 +63,7 @@ class dbClient {
     
         //==========
         $pageNext = $page+1;
-        $pagePrev = $pageNext-1;
+        $pagePrev = $page-1;
         //==========
         $res = [
             "total" => $count,
