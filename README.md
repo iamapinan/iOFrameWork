@@ -1,21 +1,21 @@
-# i/o Framework
-Easy to use and bug less mvc model framework but powerful to use. 
-### Benefit
-- Easy to understand and code.
-- Included all minimum require to build some project.
-- MVC Model
-- Cacheable template
-- Lean template structure and desing.
+# GBOX API Server
+This project is create for GBox application and it is private repo do not share anything in this repo to somebody before got any proved from iOTech Enterprise company.
 
-### Document
-- [Get Start]()
-- [Installation]()
-- [Full Document]()
+### Environments
+- Nginx
+- MySQL
+- Composer
+- Git
+
 
 ### Author
 ![Apinn](https://avatars0.githubusercontent.com/u/1413490?s=20&v=4 "Apinan Woratrakun") Apinan <apinan@iotech.co.th>, <apinan@iotech.co.th>
 
 ![Charin](https://avatars0.githubusercontent.com/u/13948263?s=20&v=4 "Charin Aumponphison") Charin <klingofmonsterdev@gmail.com>, <charin@iotech.co.th>
+
+Preecha <preecha@iotech.co.th>
+
+Bank <bank@iotech.co.th>
 
 by iOTech <https://iotech.co.th>
 
