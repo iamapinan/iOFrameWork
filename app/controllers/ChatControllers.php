@@ -86,6 +86,33 @@ class ChatControllers{
         }
     }
 
+    public function postMsg() {
+        if(!empty(this()->body['msg']) && !empty(this()->body['user_id']) && !empty(this()->body['chat_room_id'])) {
+            $data = ['user_id' => req('user_id'), 'msg' => req('msg'), 'target_id' => req('chat_room_id'), 'timestamp' => time()];
+            $this->db->insert('chat_msg', $data);
+            $data['timestamp'] = date('d/m/Y H:i', $data['timestamp']);
+            if($this->db->exec()->id() != 0) {
+                $res = [
+                    "status" => "success",
+                    "data" => $data
+                ];
+                echo json($res, 200);
+            } else {
+                $res = [
+                    "status" => "error",
+                    "msg" => "บันทึกข้อมูลไม่ได้ในขณะนี้"
+                ];
+                echo json($res, 501);
+            }
+        } else {
+            $res = [
+                "status" => "error",
+                "msg" => "ข้อมูลไม่ถูกต้อง"
+            ];
+            echo json($res, 501);
+        }
+    }
+
     public function getChatroom($roomid) {
         $chat = $this->db->exec()->select("chat_room", 
         [
