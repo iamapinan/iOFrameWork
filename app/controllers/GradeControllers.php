@@ -31,29 +31,28 @@ class GradeControllers{
 
     public function postClassroom() {
 
-        if(!empty(req('grade')) && !empty(req('email')) && !empty(req('classNumber'))) {
-            $user = $this->db->selectOne('users', ['id(user_id)', 'school_id', 'role_id'], ['username' => req('email')]);
-
+        if(!empty(req('user_id'))) {
+            $user = $this->db->selectOne('users', ['id', 'school_id', 'role_id'], ['id' => req('user_id')]);
+        
             if($user['role_id'] == 1) {
-                $grade = $this->db->selectone("educations", ["name"], ["id" => req('grade')]);
+
                 $data = [
-                    "title" => $grade["name"] .'/'. req('classNumber'),
-                    "user_id" => $user['user_id'],
-                    "grade" => req('grade'),
-                    "class" => req('classNumber'),
+                    "title" => req('name'),
+                    "user_id" => $user['id'],
+                    "code" => strtoupper(rand(1, 9) . substr(uniqid(), 0, 4) . chr(rand(ord('a'), ord('z')))),
                     "school_id" => $user['school_id']
                 ];
     
-                $this->db->insert('classrooms', $data);
-            }
-
-            if($user['role_id'] == 2) {
+                $this->db->insert('chat_room', $data);
+            } else {
+                $chatroom = $this->db->select('chat_room', ['id'], ['code' => req('code')]);
+                // require chatroom code
                 $data = [
-                    "user_id" => $user['user_id'],
-                    "classroom_id" => req('classNumber')
+                    "user_id" => req('user_id'),
+                    "chat_room_id" => $chatroom[0]['id']
                 ];
     
-                $this->db->insert('student_classrooms', $data);
+                $this->db->insert('chat_room_member', $data);
             }
 
             if($this->db->exec()->id() != 0) {
