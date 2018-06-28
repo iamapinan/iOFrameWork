@@ -16,10 +16,21 @@ class UserController {
         $result = $this->db->select("course_register", '*', [
             'user_id' => $user_id
         ]);
-        $group_by = array_key_by($result, 'course_id');
+        $group_by = [];
+        // check has registered coruse
+        foreach ( $result as $k => $arr) {
+            $c_id = $arr['course_id'] ;
+            if (  $new_arr[$c_id]  )  {
+                if ( $arr['status'] == 1 && $new_arr[$c_id]['status']==2 ) {
+                    $new_arr[$c_id] = $arr ;
+                }
+            } else {
+                $new_arr[$c_id] = $arr ;
+            }
+        }
         $data = [
-            'all' => $result,
-            'group_by_course_id' => $group_by, 
+            // 'all' => $result,
+            'group_by_course_id' => $new_arr, 
         ];
         echo json(encap_data($data));
     }
