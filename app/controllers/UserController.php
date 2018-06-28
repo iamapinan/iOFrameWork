@@ -83,6 +83,10 @@ class UserController {
         }
     }
 
+    public function updateProfile() {
+        
+    }
+
     public function changePassword() {
         $ret = $this->db->update('users', ['password' => password_hash(req('password'), PASSWORD_BCRYPT)], ['id' => req('user_id')]);
         if($ret->rowCount() != 0) {
