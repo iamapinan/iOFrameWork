@@ -36,34 +36,97 @@ class UserController {
     }
 
     public function addStudent() {
-        $std = $this->db->select("users", ["school_id"], ["id" => req('student_id'), "role_id" => 2]);
-        if(count($std) != 0) {
-            $data = [
-                "user_id" => req('user_id'),
-                "student_id" => req('student_id'),
-                "school_id" => $std[0]["school_id"]
-            ];
-            $this->db->insert('parent_data', $data);
 
-            if($this->db->exec()->id() != 0) {
-                $res = [
-                    "status" => "success",
-                    "data" => $data
+        if(req('role') == 1){//ครู
+            $data = [
+                "first_name" => req('first_name'),
+                "last_name" => req('last_name')
+            ];
+
+            $this->db->update('users', $data,["id" => req('user_id')]);
+
+            $user_data = $this->db->exec()->select(
+                "users",["[>]schools" => ["school_id" => "id"]], 
+                ["users.id", "users.username", "users.email", "users.first_name", "users.last_name", "users.school_id", "users.role_id(role)","schools.name(school_name)"], 
+                ["users.id" => req('user_id'),"LIMIT" => 1]
+            );
+
+            $res = [
+                "status" => "success",
+                "data" => $user_data[0]
+            ];
+            
+            echo json($res, 200);
+        }elseif(req('role') == 2){//นักเรียน
+            $data = [
+                "first_name" => req('first_name'),
+                "last_name" => req('last_name')
+            ];
+
+            $this->db->update('users', $data,["id" => req('user_id')]);
+
+            $user_data = $this->db->exec()->select(
+                "users",["[>]schools" => ["school_id" => "id"]], 
+                ["users.id", "users.username", "users.email", "users.first_name", "users.last_name", "users.school_id", "users.role_id(role)","schools.name(school_name)"], 
+                ["users.id" => req('user_id'),"LIMIT" => 1]
+            );
+
+            $res = [
+                "status" => "success",
+                "data" => $user_data[0]
+            ];
+            
+            echo json($res, 200);
+        }elseif(req('role') == 3){//ผู้ปกครอง
+            $std = $this->db->select("users", ["school_id"], ["id" => req('student_id'), "role_id" => 2]);
+
+            if(count($std) != 0) {
+                $data = [
+                    "user_id" => req('user_id'),
+                    "student_id" => req('student_id'),
+                    "school_id" => $std[0]["school_id"]
                 ];
-                echo json($res, 200);
+                $this->db->insert('parent_data', $data);
+
+                if($this->db->exec()->id() != 0) {
+                    $data = [
+                        "first_name" => req('first_name'),
+                        "last_name" => req('last_name')
+                    ];
+        
+                    $this->db->update('users', $data,["id" => req('user_id')]);
+        
+                    $user_data = $this->db->exec()->select(
+                        "users",["[>]schools" => ["school_id" => "id"]], 
+                        ["users.id", "users.username", "users.email", "users.first_name", "users.last_name", "users.school_id", "users.role_id(role)","schools.name(school_name)"], 
+                        ["users.id" => req('user_id'),"LIMIT" => 1]
+                    );
+        
+                    $res = [
+                        "status" => "success",
+                        "data" => $user_data[0]
+                    ];
+                    
+                    echo json($res, 200);
+                    // $res = [
+                    //     "status" => "success",
+                    //     "data" => $data
+                    // ];
+                    // echo json($res, 200);
+                } else {
+                    $res = [
+                        "status" => "error",
+                        "msg" => "บันทึกข้อมูลไม่ได้ในขณะนี้"
+                    ];
+                    echo json($res, 501);
+                }
             } else {
                 $res = [
                     "status" => "error",
-                    "msg" => "บันทึกข้อมูลไม่ได้ในขณะนี้"
+                    "msg" => "ไม่พบนักเรียน รหัสอาจไม่ถูกต้อง"
                 ];
                 echo json($res, 501);
             }
-        } else {
-            $res = [
-                "status" => "error",
-                "msg" => "ไม่พบนักเรียน รหัสอาจไม่ถูกต้อง"
-            ];
-            echo json($res, 501);
         }
     }
 
@@ -92,6 +155,10 @@ class UserController {
             ];
             echo json($res, 501);
         }
+    }
+
+    public function updateProfile() {
+        
     }
 
     public function changePassword() {

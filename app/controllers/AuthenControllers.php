@@ -26,15 +26,23 @@ class AuthenControllers{
        
         $ret = $Authen->VerifyUser(req('username'), req('password'));
         if($ret == true) {
-            $user_data = $this->db->selectOne(
-                "users", 
-                ["id", "username", "email", "first_name", "last_name", "school_id", "role_id(role)"], 
-                ["username" => req('username')]
+            // $user_data = $this->db->exec()->debug()->select(
+            //     "users",["[>]schools" => ["school_id" => "id"]], 
+            //     ["users.id", "users.username", "users.email", "users.first_name", "users.last_name", "users.school_id", "users.role_id(role)","schools.name(school_name)"], 
+            //     ["users.username" => req('username'),"LIMIT" => 1]
+            // );
+
+            $user_data = $this->db->exec()->select(
+                "users",["[>]schools" => ["school_id" => "id"]], 
+                ["users.id", "users.username", "users.email", "users.first_name", "users.last_name", "users.school_id", "users.role_id(role)","schools.name(school_name)"], 
+                ["users.username" => req('username'),"LIMIT" => 1]
             );
+
             $res = [
                 "status" => "success",
-                "data" => $user_data
+                "data" => $user_data[0]
             ];
+
             echo json($res, 200);
         } else {
             $res = [

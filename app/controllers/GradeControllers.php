@@ -25,7 +25,7 @@ class GradeControllers{
     }
 
     public function getClass($school, $userid) {
-        $class = $this->db->select("chat_room", ["id", "title"], ["school_id"=>$school, "user_id" => $userid]);
+        $class = $this->db->select("chat_room", ["id", "title","code"], ["school_id"=>$school, "user_id" => $userid]);
         echo json($class, 200);
     }
 }
