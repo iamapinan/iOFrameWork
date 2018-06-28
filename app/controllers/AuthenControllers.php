@@ -40,7 +40,7 @@ class AuthenControllers{
 
             $res = [
                 "status" => "success",
-                "data" => $user_data
+                "data" => $user_data[0]
             ];
 
             echo json($res, 200);
