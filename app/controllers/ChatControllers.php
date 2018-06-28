@@ -82,6 +82,12 @@ class ChatControllers{
                     "data" => $list
                 ];
                 echo json($res, 200);
+            }else{
+                $res = [
+                    "status" => "success",
+                    "data" => []
+                ];
+                echo json($res, 200);
             }
         }
     }
