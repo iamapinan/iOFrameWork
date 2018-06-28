@@ -32,12 +32,12 @@ class ArticleControllers{
             $search = ["article_data.school_id" => $schoolid];
         }
         
-        $res = $this->db->PaginationMulti("article_data", [
-            "[>]users" => ["uid" => "id"]], 
+        $res = $this->db->PaginationMulti("article_data", 
+            ["[>]users" => ["uid" => "id"]], 
             ['article_data.id', 'article_data.title', 'article_data.description'
             , 'article_data.uid', 'article_data.school_id', 'article_data.image'
             , 'article_data.timestamp', 'users.first_name', 'users.last_name'
-            , 'users.last_name'], $search, ["article_data.id" => "DESC"], 30);
+            , 'users.last_name'], $search, ["article_data.id" => "DESC"], 10);
         echo json($res);
     }
 
