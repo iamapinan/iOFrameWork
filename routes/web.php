@@ -3,7 +3,5 @@
  * Web route.
  */
 
-$route->any('/', 'controllers\Home@index');
-$route->get('/product', 'controllers\Product@index');
-
+$route->any('/', 'App\Controllers\Home@index');
 ?>

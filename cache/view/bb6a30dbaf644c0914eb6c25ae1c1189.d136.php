@@ -1,4 +1,6 @@
-<script src="//code.jquery.com/jquery-3.2.1.min.js" 
+<?php
+/* template head */
+/* end template head */ ob_start(); /* template body */ ?><script src="//code.jquery.com/jquery-3.2.1.min.js" 
     crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -6,4 +8,6 @@
     crossorigin="anonymous"></script>
 <script src="assets/common.js"></script>
   </body> 
-</html>
+</html><?php  /* end template body */
+return $this->buffer . ob_get_clean();
+?>
