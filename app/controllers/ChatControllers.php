@@ -74,6 +74,7 @@ class ChatControllers{
                         ["chat_msg.msg", "chat_msg.timestamp", "chat_msg.user_id", "users.first_name(user_name)"],
                         ["chat_msg.target_id" => $list[$x]['id'], "LIMIT" => 1, "ORDER" => ["timestamp" => "DESC"]]
                         );
+                        $list[$x]['photo'] = getenv('domain') . '/assets/chat_default.png';
                         // echo json($chat);
                         if(count($chat) > 0) {
                             $list[$x]['chat_msg'] = $chat[0];
@@ -89,6 +90,7 @@ class ChatControllers{
                         ["chat_msg.msg", "chat_msg.timestamp", "chat_msg.user_id", "users.first_name(user_name)"],
                         ["chat_msg.target_id" => $list[$x]['chat_room_id'], "LIMIT" => 1, "ORDER" => ["timestamp" => "DESC"]]
                         );
+                        $list[$x]['photo'] = getenv('domain') . '/assets/chat_default.png';
                         // echo json($chat);
                         if(count($chat) > 0) {
                             $list[$x]['chat_msg'] = $chat[0];
