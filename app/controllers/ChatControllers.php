@@ -62,7 +62,7 @@ class ChatControllers{
 
     public function getGroup($userid) {
         if($userid != '') {
-            $user = $this->db->selectOne('users', ['id', 'school_id', 'role_id'], ['id' => req($userid)]);
+            $user = $this->db->selectOne('users', ['id', 'school_id', 'role_id'], ['id' => $userid]);
             //Teacher
             if($user['role_id'] == 1) {
                 $list = $this->db->select("chat_room", "*", ["user_id" => $userid]); //get room info
