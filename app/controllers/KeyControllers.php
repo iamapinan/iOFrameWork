@@ -27,11 +27,10 @@ class KeyControllers {
                     "status" => 0
                 ];
             }
-           echo json($data);
-           exit;
+
             $insert = $this->db->insert('license_key', $data);
        
-            if($insert != 0) {
+            if($this->db->exec()->id() != 0) {
                 $res = [
                     "status" => "success",
                     "keys" => $data

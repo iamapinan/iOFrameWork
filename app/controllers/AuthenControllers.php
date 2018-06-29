@@ -63,19 +63,48 @@ class AuthenControllers{
      * Register
      */
     public function postRegister() {
-        $req = this()->body;
 
-        $data = [
-            "username" => req('email'),
-            "password" => $this->Encode(req('password')),
-            "email" => req('email'),
-            "first_name" => req('first_name'),
-            "last_name" => req('last_name'),
-            "school_id" => 0,
-            "role_id" => 2
-        ];
-        // echo json($data);
-        $this->db->insert("users", $data);
+        $user_data = $this->db->exec()->select(
+        "users", 
+        ["users.id"], 
+        ["users.email" => req('email'),"LIMIT" => 1]);
+
+        if(count($user_data) != 0) {
+            $res = [
+                "status" => "error",
+                "msg" => "ไม่สามารถสร้างบัญชีผู้ใช้ของคุณได้ กรุณาตรวจสอบ หรือติดต่อผู้ดูแล"
+            ];
+            echo json($res, 501);
+            exit;
+        }
+
+        // $req = this()->body;
+
+        $get_key = $this->db->select('license_key', ['role_id', 'key', 'org_id', 'id'], ['key' => req('key'), 'status' => 0]);
+
+        if(isset($get_key[0]['id'])) {
+            $data = [
+                "username" => req('email'),
+                "password" => $this->Encode(req('password')),
+                "email" => req('email'),
+                "first_name" => req('first_name'),
+                "last_name" => req('last_name'),
+                "school_id" => $get_key[0]['org_id'],
+                "role_id" => $get_key[0]['role_id'],
+                "photo" => 'https://picsum.photos/200/300'
+            ];
+            
+            $this->db->update('license_key', ['status' => 1], ['id' => $get_key[0]['id']]);
+            $this->db->insert("users", $data);
+        } else {
+            $res = [
+                "status" => "error",
+                "msg" => "รหัสลงทะเบียนไม่ถูกต้อง กรุณาลองใหม่"
+            ];
+            echo json($res, 501);
+            exit;
+        }
+        
         if($this->db->exec()->id() != 0) {
             unset($data['password']);
             $res = [
