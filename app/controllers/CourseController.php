@@ -10,9 +10,11 @@ class CourseController {
     }
 
     public function submitCourse($id){
+        $req = request() ;
         $db = new \App\DbClient() ;
         $db->update('course_register',[
-            'status'=> 'done'
+            'status'=> 'ดำเนินการเสร็จสิ้น',
+            'max_score' => $req['max_score']
         ],[
             'id' => $id 
         ]);
@@ -73,5 +75,13 @@ class CourseController {
         $res = null ;
         echo json( encap_data($res)) ;
     }
+
+    // public function getRegisteredByCourseId($c_id) {
+    //     $db = new \App\DbClient ;
+    //     $db->select('course_register', '*', [
+    //         'course_id', $c_id
+    //     ])
+    //     echo json() ;
+    // }
     
 }
