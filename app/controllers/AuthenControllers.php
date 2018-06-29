@@ -116,6 +116,7 @@ class AuthenControllers{
                 "data" => $user_data
             ];
             echo json($res, 200);
+            
         } else {
             $res = [
                 "status" => "error",
