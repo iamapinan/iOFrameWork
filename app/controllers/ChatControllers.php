@@ -83,7 +83,7 @@ class ChatControllers{
                         $chat = [];
                     }
                 } else {
-                    $list = $this->db->exec()->select("chat_room_member", ["[>]chat_room" => ["chat_room_id" => "id"]], ["chat_room_member.chat_room_id","chat_room.title","chat_room.code", "chat_room.school_id", "chat_room.user_id", "chat_room.photo"], ["chat_room_member.user_id" => $userid]);
+                    $list = $this->db->exec()->select("chat_room_member", ["[>]chat_room" => ["chat_room_id" => "id"]], ["chat_room_member.chat_room_id(id)","chat_room.title","chat_room.code", "chat_room.school_id", "chat_room.user_id", "chat_room.photo"], ["chat_room_member.user_id" => $userid]);
                     for($x=0;$x<count($list);$x++) {
                         $chat = $this->db->exec()->select("chat_msg", 
                         ["[>]users" => ["user_id" => "id"]],
