@@ -80,6 +80,12 @@ class ArticleControllers{
                 "data" => $data
             ];
             echo json($res);
+        } else {
+            $res = [
+                "status" => "error",
+                "data" => []
+            ];
+            echo json($res);
         }
     }
 }

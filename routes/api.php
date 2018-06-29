@@ -17,6 +17,7 @@ $route->group(getconst('api_prefix'), function() {
     $this->put('courses/{id}/submit', 'App\Controllers\CourseController@submitCourse'); 
     $this->post('/addStudent', 'App\Controllers\UserController@addStudent');
     $this->get('/userInfo/?', 'App\Controllers\UserController@userInfo');
+    $this->post('/userInfo/photo', 'App\Controllers\UserController@uploadPhoto');
     $this->post('/change_password', 'App\Controllers\UserController@changePassword');
     $this->get('/userInfo/student/?', 'App\Controllers\UserController@myStudent');
     $this->controller('/authen', 'App\Controllers\AuthenControllers');

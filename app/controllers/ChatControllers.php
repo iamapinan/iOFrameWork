@@ -62,20 +62,40 @@ class ChatControllers{
 
     public function getGroup($userid) {
         if($userid != '') {
-            $list = $this->db->select("chat_room", "*", ["user_id" => $userid]); //get room info
-            for($x=0;$x<count($list);$x++) {
-                $chat = $this->db->exec()->select("chat_msg", 
-                ["[>]users" => ["user_id" => "id"]],
-                ["chat_msg.msg", "chat_msg.timestamp", "chat_msg.user_id", "users.first_name(user_name)"],
-                ["chat_msg.target_id" => $list[$x]['id'], "LIMIT" => 1, "ORDER" => ["timestamp" => "DESC"]]
-                );
-                // echo json($chat);
-                if(count($chat) > 0) {
-                    $list[$x]['chat_msg'] = $chat[0];
-                    $list[$x]['chat_time'] = date('d/m/Y H:i', $chat[0]['timestamp']);
+            $user = $this->db->selectOne('users', ['id', 'school_id', 'role_id'], ['id' => req($userid)]);
+            //Teacher
+            if($user['role_id'] == 1) {
+                $list = $this->db->select("chat_room", "*", ["user_id" => $userid]); //get room info
+                for($x=0;$x<count($list);$x++) {
+                    $chat = $this->db->exec()->select("chat_msg", 
+                    ["[>]users" => ["user_id" => "id"]],
+                    ["chat_msg.msg", "chat_msg.timestamp", "chat_msg.user_id", "users.first_name(user_name)"],
+                    ["chat_msg.target_id" => $list[$x]['id'], "LIMIT" => 1, "ORDER" => ["timestamp" => "DESC"]]
+                    );
+                    // echo json($chat);
+                    if(count($chat) > 0) {
+                        $list[$x]['chat_msg'] = $chat[0];
+                        $list[$x]['chat_time'] = date('d/m/Y H:i', $chat[0]['timestamp']);
+                    }
+                    $chat = [];
                 }
-                $chat = [];
+            } else {
+                $list = $this->db->select("chat_room_member", "*", ["user_id" => $userid]);
+                for($x=0;$x<count($list);$x++) {
+                    $chat = $this->db->exec()->select("chat_msg", 
+                    ["[>]users" => ["user_id" => "id"]],
+                    ["chat_msg.msg", "chat_msg.timestamp", "chat_msg.user_id", "users.first_name(user_name)"],
+                    ["chat_msg.target_id" => $list[$x]['chat_room_id'], "LIMIT" => 1, "ORDER" => ["timestamp" => "DESC"]]
+                    );
+                    // echo json($chat);
+                    if(count($chat) > 0) {
+                        $list[$x]['chat_msg'] = $chat[0];
+                        $list[$x]['chat_time'] = date('d/m/Y H:i', $chat[0]['timestamp']);
+                    }
+                    $chat = [];
+                }
             }
+            
             if(count($list) > 0) {
                 $res = [
                     "status" => "success",

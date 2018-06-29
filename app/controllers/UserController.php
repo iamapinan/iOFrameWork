@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use \App\MiddleWare\BasicAuthen;
+use \App\MiddleWare\UploadFile;
 
 class UserController {
     private $db;
@@ -33,6 +34,34 @@ class UserController {
             'group_by_course_id' => $new_arr, 
         ];
         echo json(encap_data($data));
+    }
+
+    public function uploadPhoto() {
+        // $upload = new UploadFile;
+        // $upload->file = this()->body['image'];
+        $dest = BASE_PATH . '/public/store/user_photo/';
+        $file = uniqid() . '.jpg';
+        $result = move_uploaded_file($_FILES['image']['tmp_name'], $dest . $file);
+
+        $data = [
+            "photo" => getenv('domain').'/store/user_photo/'.$file,
+        ];
+
+        $update = $this->db->update("users",$data, ['id' => req('user_id')]);
+
+        if($update->rowCount() != 0) {
+            $res = [
+                "status" => "success",
+                "data" => $data
+            ];
+            echo json($res);
+        } else {
+            $res = [
+                "status" => "error",
+                "data" => []
+            ];
+            echo json($res);
+        }
     }
 
     public function addStudent() {
