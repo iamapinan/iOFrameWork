@@ -21,7 +21,7 @@ class UserController {
         // check has registered coruse
         foreach ( $result as $k => $arr) {
             $c_id = $arr['course_id'] ;
-            if (  $new_arr[$c_id]  )  {
+            if (  isset($new_arr[$c_id]) )  {
                 if ( $arr['status'] == 1 && $new_arr[$c_id]['status']==2 ) {
                     $new_arr[$c_id] = $arr ;
                 }
