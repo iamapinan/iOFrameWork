@@ -34,7 +34,7 @@ class AuthenControllers{
 
             $user_data = $this->db->exec()->select(
                 "users",["[>]schools" => ["school_id" => "id"]], 
-                ["users.id", "users.username", "users.email", "users.first_name", "users.last_name", "users.school_id", "users.role_id(role)","schools.name(school_name)"], 
+                ["users.id", "users.username", "users.email", "users.first_name", "users.last_name", "users.school_id", "users.role_id(role)", "users.photo(photo)","schools.name(school_name)"], 
                 ["users.username" => req('username'),"LIMIT" => 1]
             );
 
