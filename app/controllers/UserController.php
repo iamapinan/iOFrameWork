@@ -40,7 +40,7 @@ class UserController {
         // $upload = new UploadFile;
         // $upload->file = this()->body['image'];
 
-        echo json(this());
+        echo json(this()->body['image']);
         exit;
         $dest = BASE_PATH . '/public/store/user_photo/';
         $file = uniqid() . '.jpg';
