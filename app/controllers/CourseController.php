@@ -8,7 +8,6 @@ class CourseController {
         $basic = new BasicAuthen;
         $basic->Check();
     }
-
     public function submitCourse($id){
         $req = request() ;
         $db = new \App\DbClient() ;
@@ -23,7 +22,6 @@ class CourseController {
         ]);
         echo json( encap_data( ['total_score' => $select[0]['total_score']]) );
     }
-
     /**
      * send answer
      * 
