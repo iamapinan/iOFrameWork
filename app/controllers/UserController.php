@@ -59,7 +59,7 @@ class UserController {
             $user_data = $this->db->exec()->select(
                 "users",["[>]schools" => ["school_id" => "id"]], 
                 ["users.id", "users.username", "users.email", "users.first_name", "users.last_name", "users.school_id", "users.role_id(role)", "users.photo(photo)","schools.name(school_name)"], 
-                ["users.username" => req('user_id'),"LIMIT" => 1]
+                ["users.id" => req('user_id'),"LIMIT" => 1]
             );
             $res = [
                 "status" => "success",
