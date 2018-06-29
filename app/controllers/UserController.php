@@ -17,6 +17,7 @@ class UserController {
             'user_id' => $user_id
         ]);
         $group_by = [];
+        $new_arr= [];
         // check has registered coruse
         foreach ( $result as $k => $arr) {
             $c_id = $arr['course_id'] ;
