@@ -78,7 +78,7 @@ class ChatControllers{
                         // echo json($chat);
                         if(count($chat) > 0) {
                             $list[$x]['chat_msg'] = $chat[0];
-                            $list[$x]['chat_time'] = date('d/m/Y H:i', $chat[0]['timestamp']);
+                            $list[$x]['chat_time'] = $chat[0]['timestamp'];
                         }
                         $chat = [];
                     }
@@ -94,7 +94,7 @@ class ChatControllers{
                         // echo json($chat);
                         if(count($chat) > 0) {
                             $list[$x]['chat_msg'] = $chat[0];
-                            $list[$x]['chat_time'] = date('d/m/Y H:i', $chat[0]['timestamp']);
+                            $list[$x]['chat_time'] = $chat[0]['timestamp'];
                         }
                         $chat = [];
                     }
@@ -125,9 +125,8 @@ class ChatControllers{
 
     public function postMsg() {
         if(!empty(this()->body['msg']) && !empty(this()->body['user_id']) && !empty(this()->body['chat_room_id'])) {
-            $data = ['user_id' => req('user_id'), 'msg' => req('msg'), 'target_id' => req('chat_room_id'), 'timestamp' => time()];
+            $data = ['user_id' => req('user_id'), 'msg' => req('msg'), 'target_id' => req('chat_room_id'), 'timestamp' => date('d/m/Y H:i')];
             $this->db->insert('chat_msg', $data);
-            $data['timestamp'] = date('d/m/Y H:i', $data['timestamp']);
             if($this->db->exec()->id() != 0) {
                 $res = [
                     "status" => "success",

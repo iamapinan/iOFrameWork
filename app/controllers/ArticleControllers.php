@@ -43,7 +43,7 @@ class ArticleControllers{
 
     public function getData($id) {
         $res = $this->db->selectOne("article_data", ['id', 'title', 'description', 'uid', 'school_id', 'image', 'timestamp'], ["id" => $id]);
-        $res['timestamp'] = ($res['timestamp'] != null) ? date('d/m/Y H:i', $res['timestamp']) : time();
+        $res['timestamp'] = $res['timestamp'];
         echo json($res);
     }
 
@@ -70,7 +70,7 @@ class ArticleControllers{
             "uid" => req('userid'),
             "school_id" => $school['school_id'],
             "image" => getenv('domain') . '/store/article_file/' .$upload_result['basename'],
-            "timestamp" => time()
+            "timestamp" => date('d/m/Y H:i')
         ];
         $this->db->insert("article_data", $data);
 
