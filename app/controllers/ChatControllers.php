@@ -88,7 +88,7 @@ class ChatControllers{
                         $chat = $this->db->exec()->select("chat_msg", 
                         ["[>]users" => ["user_id" => "id"]],
                         ["chat_msg.msg", "chat_msg.timestamp", "chat_msg.user_id", "users.first_name(user_name)"],
-                        ["chat_msg.target_id" => $list[$x]['chat_room_id'], "LIMIT" => 1, "ORDER" => ["timestamp" => "DESC"]]
+                        ["chat_msg.target_id" => $list[$x]['id'], "LIMIT" => 1, "ORDER" => ["timestamp" => "DESC"]]
                         );
                         $list[$x]['photo'] = getenv('domain') . '/assets/chat_default.png';
                         // echo json($chat);
