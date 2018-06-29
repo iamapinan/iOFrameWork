@@ -106,10 +106,14 @@ class AuthenControllers{
         }
         
         if($this->db->exec()->id() != 0) {
-            unset($data['password']);
+            $user_data = $this->db->exec()->select(
+                "users",["[>]schools" => ["school_id" => "id"]], 
+                ["users.id", "users.username", "users.email", "users.first_name", "users.last_name", "users.school_id", "users.role_id(role)", "users.photo(photo)","schools.name(school_name)"], 
+                ["users.email" => req('email'),"LIMIT" => 1]
+            );
             $res = [
                 "status" => "success",
-                "data" => $data
+                "data" => $user_data
             ];
             echo json($res, 200);
         } else {
