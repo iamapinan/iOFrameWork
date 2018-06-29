@@ -37,7 +37,7 @@ class ArticleControllers{
             ['article_data.id', 'article_data.title', 'article_data.description'
             , 'article_data.uid', 'article_data.school_id', 'article_data.image'
             , 'article_data.timestamp', 'users.first_name', 'users.last_name'
-            , 'users.last_name', 'users.photo'], $search, ["article_data.id" => "DESC"], 10);
+            , 'users.last_name', 'users.photo(user_photo)'], $search, ["article_data.id" => "DESC"], 10);
         echo json($res);
     }
 
