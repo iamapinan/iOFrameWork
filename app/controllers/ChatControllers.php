@@ -162,7 +162,7 @@ class ChatControllers{
         $member = $this->db->select("chat_room_member", 
         [ "[>]users" => ["user_id" => "id"], "[>]roles" => ["id" => "id"] ], 
         ["users.first_name", "users.last_name", "users.id", "users.photo", "roles.name(role_name)"],
-        ["chat_room.id" => $roomid]);
+        ["chat_room_id" => $roomid]);
         $chat['photo'] = getenv('domain') . '/assets/chat_default.png';
         $msg = $this->db->PaginationMulti("chat_msg", 
             ["[>]users" => ["user_id" => "id"]],
