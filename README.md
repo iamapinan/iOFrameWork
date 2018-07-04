@@ -1,5 +1,5 @@
-# GBOX API Server
-This project is create for GBox application and it is private repo do not share anything in this repo to somebody before got any proved from iOTech Enterprise company.
+# Interactive Learning API Server
+This project is create for application and it is private repo do not share anything in this repo to somebody before got any proved from iOTech Enterprise company.
 
 ### Environments
 - Nginx
