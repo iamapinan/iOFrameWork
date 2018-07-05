@@ -19,12 +19,6 @@
             "role": "Developer"
         }
     ],
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://git.iotech.co.th/iotech/iOFramework.git"
-        }
-    ],
     "license": "MIT",
     "minimum-stability": "dev",
     "require": {
