@@ -6,6 +6,10 @@ stages:
   - test
   - deploy
 
+cache:
+  paths:
+    - vendor/
+
 build:
   stage: build
   only:
