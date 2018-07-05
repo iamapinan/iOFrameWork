@@ -22,7 +22,7 @@
     "repositories": [
         {
             "type": "git",
-            "url": "http://git.iotech.co.th/iotech/iOFramework.git"
+            "url": "https://git.iotech.co.th/iotech/iOFramework.git"
         }
     ],
     "license": "MIT",
