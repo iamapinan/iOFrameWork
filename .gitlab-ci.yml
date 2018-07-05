@@ -1,6 +1,10 @@
 # Select image from https://hub.docker.com/iamapinan/php-nginx-mongo
 image: iamapinan/php-nginx-mongo:1.3
 
+stages:
+   - test
+   - deploy
+
 # Select what we should cache between builds
 cache:
   paths:
@@ -8,11 +12,7 @@ cache:
 
 before_script:
   - composer install
-
-build:
-  script:
-    - pecl install xdebug && docker-php-ext-enable xdebug
-
+  - pecl install xdebug && docker-php-ext-enable xdebug
 
 test:
   script:
@@ -23,4 +23,4 @@ deploy:
   environment: production
   script:
     - ls
-    - echo $SSH_PRIV_KEY
+    - ssh $DEPLOY_HOST_USER@$DEPLOY_HOST_B
