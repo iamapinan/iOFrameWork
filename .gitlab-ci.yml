@@ -10,13 +10,13 @@ cache:
 before_script:
 - pecl install xdebug && docker-php-ext-enable xdebug
 # Install and run Composer
-- php composer.phar install
+- composer install
 
 test:
   script:
   - vendor/bin/phpunit --configuration phpunit.xml --coverage-html --colors=auto
 
-deploy_production:
+deploy:
   stage: deploy
   environment: production
   script:
