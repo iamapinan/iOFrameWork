@@ -3,7 +3,7 @@ namespace App\Middleware;
 
 class Authenticate extends \App\dbClient {
 
-    public function VerifyUser($User, $Pass) {
+    public function Authen($User, $Pass) {
         $SelectUser = $this->select(
             "users", 
             ["password"], 

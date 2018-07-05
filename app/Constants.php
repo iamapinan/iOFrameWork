@@ -7,8 +7,8 @@ $const = [
     'template_dir' => BASE_PATH . 'templates/',
     'default_database' => 'mysql',
     'template_cache' => BASE_PATH . 'cache/view/',
-    'keygen' => 'https://key-activate.iotech.co.th',
-    'keySize' => 8
+    'keySize' => 8,
+    'testCheck' => true
 ];
 
 /**

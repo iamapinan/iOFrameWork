@@ -1,4 +1,6 @@
 # Interactive Learning API Server
+[![pipeline status](http://git.iotech.co.th/iotech/Interactive-Learning-API/badges/master/pipeline.svg)](http://git.iotech.co.th/iotech/Interactive-Learning-API/commits/master)
+
 This project is create for application and it is private repo do not share anything in this repo to somebody before got any proved from iOTech Enterprise company.
 
 ### Environments

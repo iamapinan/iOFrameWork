@@ -2,9 +2,17 @@
 namespace App\Middleware;
 
 class UploadFile {
+    /**
+     * Predefine data
+     */
     public $dest = '';
     public $file = '';
     public $ext = '.jpg';
+
+    /**
+     * To convert base64 image data to file.
+     * @return array
+     */
     public function upload_base64() {
         $this->ext = explode('/', explode(';', this()->body['image'])[0])[1];
         $image_parts = explode(";base64,", $this->file);
