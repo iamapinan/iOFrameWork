@@ -13,6 +13,7 @@ build:
   only:
     - master
   script:
+    - apk add openssh
     - composer install
     - vendor/bin/phpunit --configuration phpunit.xml --colors=auto
 
