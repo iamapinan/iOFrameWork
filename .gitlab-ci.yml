@@ -30,5 +30,4 @@ deploy:
     - master
   environment: production
   script:
-    - ls
-    - "ssh root@$DEPLOY_HOST_B"
+    - echo $DEPLOY_HOST_B
