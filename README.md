@@ -1,14 +1,19 @@
-# Interactive Learning API Server
-[![pipeline status](http://git.iotech.co.th/iotech/Interactive-Learning-API/badges/master/pipeline.svg)](http://git.iotech.co.th/iotech/Interactive-Learning-API/commits/master)
+![frameworklogo](https://iotech.co.th/wp-content/uploads/2018/05/Framework-logo_Vertical-211x100.png)
 
-This project is create for application and it is private repo do not share anything in this repo to somebody before got any proved from iOTech Enterprise company.
+# I/O Framework 0.2 alpha
+Easy to use and bug less mvc model framework but powerful to use. 
 
-### Environments
-- Nginx
-- MySQL
-- Composer
-- Git
+### Benefit
+- Easy to understand and code.
+- Included all minimum require to build some project.
+- MVC Model
+- Cacheable template
+- Lean template structure and desing.
 
+### Document
+- [Get Start]()
+- [Installation]()
+- [Full Document]()
 
 ### Author
 ![Apinn](https://avatars0.githubusercontent.com/u/1413490?s=20&v=4 "Apinan Woratrakun") Apinan <apinan@iotech.co.th>, <apinan@iotech.co.th>
