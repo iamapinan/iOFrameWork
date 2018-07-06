@@ -16,7 +16,7 @@ build:
     - master
   script:
     - apt-get update -yqq
-    - apt-get install git -yqq
+    - apt-get install git openssh-server -yqq
     - docker-php-ext-install pdo_mysql
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
