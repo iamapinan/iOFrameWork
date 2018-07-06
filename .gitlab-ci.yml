@@ -10,7 +10,7 @@ cache:
 
 before_script:
     - apt-get update -yqq
-    - 'which unzip || (apt-get install zip unzip -y)'
+    - 'which unzip || (apt-get install zip unzip zlib1g-dev -y)'
     - 'which git || ( apt-get install git -y )'
     - 'which ssh-agent || ( apt-get install openssh-client -y )'
     - 'which wget || ( apt-get install wget -y )'
