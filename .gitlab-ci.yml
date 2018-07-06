@@ -17,10 +17,11 @@ test:
   stage: test
   only:
     - master
-  script:
+  before_script:
     - docker-php-ext-install pdo_mysql
     - docker-php-ext-install zip
     - curl -sS https://getcomposer.org/installer | php
+  script:
     - php composer.phar install
     - vendor/bin/phpunit --configuration phpunit.xml --colors=auto
 
@@ -28,11 +29,13 @@ deploy:
   stage: deploy
   only:
     - master
-  script:
+  before_script:
     - 'which ssh-agent || ( apt-get install openssh-client -y )'
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - ssh-add <(echo "$SSH_PRIV_KEY")
-    - rsync -azP --exclude .git --exclude .gitignore --exclude composer.lock --exclude composer.phar --exclude .gitlab-ci.yml --exclude .env --exclude vendor . root@$DEPLOY_HOST_B:/mnt/data/interactive-app/app
-    - ssh -p22 root@$DEPLOY_HOST_B "cd /mnt/data/interactive-app/app && composer install"
+  script:
+    - rsync -azP --exclude .git --exclude .gitignore --exclude composer.lock --exclude composer.phar --exclude .gitlab-ci.yml --exclude .env --exclude vendor . root@$DEPLOY_HOST_B:$INSTALL_DIR
+  after_script:  
+    - ssh -p22 root@$DEPLOY_HOST_B "cd $INSTALL_DIR && composer install"
