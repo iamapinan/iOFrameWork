@@ -8,15 +8,16 @@ stages:
 
 cache:
   paths:
-    - vendor/
+    untracked: true
 
-build:
-  stage: build
-  only:
-    - master
+before_script:
   script:
     - apt-get update -yqq
     - apt-get install git openssh-server -yqq
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - docker-php-ext-install pdo_mysql
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
@@ -32,12 +33,6 @@ deploy:
   stage: deploy
   only:
     - master
-  environment: production
   script:
-    - mkdir -p ~/.ssh
-    - echo "$SSH_PRIV_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - chmod 700 ~/.ssh/id_rsa
-    - eval "$(ssh-agent -s)"
-    - ssh-add ~/.ssh/id_rsa
-    - ssh-keyscan -H $DEPLOY_HOST_B >> ~/.ssh/known_hosts
-    - ssh root@$DEPLOY_HOST_B
+    - ssh-add <(echo "$SSH_PRIV_KEY")
+    - ssh -p22 root@$DEPLOY_HOST_B "touch /mnt/data/interactive-app/app/test_file"
