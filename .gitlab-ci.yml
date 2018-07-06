@@ -21,6 +21,7 @@ build:test:
 build:deploy:
   stage: build
   script: 
+    - apt-get update -yqq
     - 'which ssh-agent || ( apt-get install openssh-client -y )'
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
