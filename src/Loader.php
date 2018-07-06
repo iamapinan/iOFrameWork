@@ -1,21 +1,17 @@
 <?php
 namespace iO\Framework;
 
-require ( BASE_PATH . 'app/Constants.php' );
-require ( BASE_PATH . 'app/Functions.php' );
-
 class Loader {
 
     protected $fnc;
     protected $cont;
 
     function __construct() {
-        global $fnc, $const;
         /**
          * Load .env data to PHP Environment
          */
-        if(is_file(BASE_DIR . '.env')) {
-            $dotenv = new Dotenv\Dotenv(BASE_PATH);
+        if(is_file(BASE_PATH . '.env')) {
+            $dotenv = new \Dotenv\Dotenv(BASE_PATH);
             $dotenv->load();
         }
 
@@ -23,9 +19,15 @@ class Loader {
          * Check environment.
          */
         $this->environment();
+        
+        /**
+         * Load constant and utility
+         */
+        require ( BASE_PATH . 'app/Constants.php' );
+        require ( BASE_PATH . 'app/Functions.php' );
 
-        $this->fnc = $fnc;
-        $this->cont = $cont;
+        $this->fncs = $fnc;
+        $this->cont = $const;
     }
     
     /**
@@ -58,7 +60,8 @@ class Loader {
      * Register function to alias.
      */
     public function registerFunction() {
-        foreach ($this->fnc as $fn => $fv) {
+        
+        foreach ($this->fncs as $fn => $fv) {
             register_func_alias($fn, $fv);
         }
     }
@@ -67,9 +70,9 @@ class Loader {
      * Route initial
      */
     public function Route() {
-        $app            = System\App::instance();
-        $app->request   = System\Request::instance();
-        $app->route     = System\Route::instance($app->request);
+        $app            = \System\App::instance();
+        $app->request   = \System\Request::instance();
+        $app->route     = \System\Route::instance($app->request);
         $route          = $app->route;
 
         /**

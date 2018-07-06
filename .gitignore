@@ -3,17 +3,20 @@ composer.phar
 *.phar
 /vendor/
 *.lock
+*.pid
 
 ### Framework ###
 .env.*.php
 .env.php
 .env
+.gitlab-ci.yml
 node_modules/
 npm-debug.log
 .cache/view/*
 .config/
 .local/
 cache/view/*
+
 
 ### Local ###
 .gitconfig
@@ -22,3 +25,4 @@ cache/view/*
 laradock/
 .cache
 phinx.yml
+nginx_conf/*

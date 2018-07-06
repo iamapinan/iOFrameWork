@@ -2,7 +2,7 @@
 use Dwoo\Core;
 
 function get_constant($n) {
-    global $const;
+    require ( BASE_PATH . 'app/Constants.php' );
     return $const[$n];
 }
 
