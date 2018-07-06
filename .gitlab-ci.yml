@@ -2,38 +2,24 @@
 image: php:7.1
 
 stages:
-  - build
   - test
   - deploy
 
 cache:
   untracked: true
 
-build:test:
-  stage: build
-  script: 
+before_script:
     - apt-get update -yqq
     - 'which unzip || (apt-get install zip unzip zlib1g-dev -y)'
     - 'which git || ( apt-get install git -y )'
-    - docker-php-ext-install pdo_mysql
-    - docker-php-ext-install zip
-
-build:deploy:
-  stage: build
-  script: 
-    - apt-get update -yqq
-    - 'which ssh-agent || ( apt-get install openssh-client -y )'
-    - mkdir -p ~/.ssh
-    - eval $(ssh-agent -s)
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
 test:
   stage: test
   only:
     - master
-  dependencies:
-    - build:test
   script:
+    - docker-php-ext-install pdo_mysql
+    - docker-php-ext-install zip
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
     - vendor/bin/phpunit --configuration phpunit.xml --colors=auto
@@ -42,9 +28,11 @@ deploy:
   stage: deploy
   only:
     - master
-  dependencies:
-    - build:deploy
   script:
+    - 'which ssh-agent || ( apt-get install openssh-client -y )'
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - ssh-add <(echo "$SSH_PRIV_KEY")
     - rsync -azP --exclude .git --exclude .gitignore --exclude composer.lock --exclude composer.phar --exclude .gitlab-ci.yml --exclude .env --exclude vendor . root@$DEPLOY_HOST_B:/mnt/data/interactive-app/app
     - ssh -p22 root@$DEPLOY_HOST_B "cd /mnt/data/interactive-app/app && composer install"
