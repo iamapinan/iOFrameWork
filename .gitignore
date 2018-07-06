@@ -9,7 +9,6 @@ composer.phar
 .env.*.php
 .env.php
 .env
-.gitlab-ci.yml
 node_modules/
 npm-debug.log
 .cache/view/*
