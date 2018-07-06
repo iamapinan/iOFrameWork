@@ -17,10 +17,6 @@ before_script:
     - eval $(ssh-agent -s)
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - docker-php-ext-install pdo_mysql
-    - wget https://phar.phpunit.de/phpunit-7.2.6.phar
-    - chmod +x phpunit-7.2.6.phar
-    - mv phpunit-7.2.6.phar /usr/local/bin/phpunit
-    - phpunit --version
 
 test:
   stage: test

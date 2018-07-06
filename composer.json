@@ -29,7 +29,7 @@
         "gilbitron/easycsrf": "1.0.1",
         "vlucas/phpdotenv": "2.4.0",
         "robmorgan/phinx": "dev-master",
-        "phpunit/phpunit": "7.2.6"
+        "phpunit/phpunit": "6.5.5"
     },
     "require-dev": {
         "filp/whoops": "2.1.14",
