@@ -12,6 +12,7 @@ before_script:
     - apt-get update -yqq
     - 'which unzip || (apt-get install zip unzip zlib1g-dev -y)'
     - 'which git || ( apt-get install git -y )'
+    - 'which ssh-agent || ( apt-get install openssh-client -y )'
     - 'which wget || ( apt-get install wget -y )'
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
@@ -32,9 +33,9 @@ deploy:
   stage: deploy
   only:
     - master
-  before_script:
-    - 'which ssh-agent || ( apt-get install openssh-client -y )'
   script:
     - ssh-add <(echo "$SSH_PRIV_KEY")
     - rsync -azP --exclude .git --exclude .gitignore --exclude composer.lock --exclude composer.phar --exclude .gitlab-ci.yml --exclude .env --exclude vendor . root@$DEPLOY_HOST_B:$INSTALL_DIR
     - ssh -p22 root@$DEPLOY_HOST_B "cd $INSTALL_DIR && composer install"
+    - ssh -p22 root@$DEPLOY_HOST_B "chmod 777 -R $INSTALL_DIR/cache"
+    - ssh -p22 root@$DEPLOY_HOST_B "chmod 777 -R $INSTALL_DIR/storage"
