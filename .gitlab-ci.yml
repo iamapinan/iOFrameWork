@@ -10,20 +10,21 @@ cache:
 
 before_script:
     - apt-get update -yqq
-    - apt-get install git openssh-server -yqq
+    - apt-get install git -yqq
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - docker-php-ext-install pdo_mysql
-    - curl -sS https://getcomposer.org/installer | php
-    - php composer.phar install
+
 
 test:
   stage: test
   only:
     - master
   script:
+    - docker-php-ext-install pdo_mysql
+    - curl -sS https://getcomposer.org/installer | php
+    - php composer.phar install
     - vendor/bin/phpunit --configuration phpunit.xml --colors=auto
 
 deploy:
@@ -32,4 +33,5 @@ deploy:
     - master
   script:
     - ssh-add <(echo "$SSH_PRIV_KEY")
-    - ssh -p22 root@$DEPLOY_HOST_B "touch /mnt/data/interactive-app/app/test_file"
+    - rsync -azP --exclude .git --exclude .gitignore --exclude .gitlab-ci.yml --exclude .env --exclude vendor . root@$DEPLOY_HOST_B:/mnt/data/interactive-app/app
+    - ssh -p22 root@$DEPLOY_HOST_B "cd /mnt/data/interactive-app/app && composer install"
