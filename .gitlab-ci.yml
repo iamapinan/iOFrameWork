@@ -2,6 +2,7 @@
 image: php:7.1
 
 stages:
+  - build
   - test
   - deploy
 
