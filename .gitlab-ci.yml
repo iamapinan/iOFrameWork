@@ -10,7 +10,6 @@ cache:
     untracked: true
 
 before_script:
-  script:
     - apt-get update -yqq
     - apt-get install git openssh-server -yqq
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
