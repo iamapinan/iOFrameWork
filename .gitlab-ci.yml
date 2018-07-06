@@ -8,21 +8,28 @@ stages:
 cache:
   untracked: true
 
-before_script:
+build:test:
+  stage: build
+  script: 
     - apt-get update -yqq
     - 'which unzip || (apt-get install zip unzip zlib1g-dev -y)'
     - 'which git || ( apt-get install git -y )'
+    - docker-php-ext-install pdo_mysql
+    - docker-php-ext-install zip
+
+build:deploy:
+  stage: build
     - 'which ssh-agent || ( apt-get install openssh-client -y )'
-    - 'which wget || ( apt-get install wget -y )'
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - docker-php-ext-install pdo_mysql
-    - docker-php-ext-install zip
+
 test:
   stage: test
   only:
     - master
+  dependencies:
+    - build:test
   script:
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
@@ -32,6 +39,8 @@ deploy:
   stage: deploy
   only:
     - master
+  dependencies:
+    - build:deploy
   script:
     - ssh-add <(echo "$SSH_PRIV_KEY")
     - rsync -azP --exclude .git --exclude .gitignore --exclude composer.lock --exclude composer.phar --exclude .gitlab-ci.yml --exclude .env --exclude vendor . root@$DEPLOY_HOST_B:/mnt/data/interactive-app/app
