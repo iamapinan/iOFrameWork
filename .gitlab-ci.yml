@@ -30,4 +30,4 @@ deploy:
     - master
   environment: production
   script:
-    - ssh root@122.155.186.155
+      ssh root@$DEPLOY_HOST_B
