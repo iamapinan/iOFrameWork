@@ -1,5 +1,5 @@
 # Select image from https://hub.docker.com/iamapinan/php-nginx-mongo
-image: iamapinan/php-nginx-mongo:1.3
+image: php:7.1
 
 stages:
   - build
@@ -15,7 +15,11 @@ build:
   only:
     - master
   script:
-    - composer install
+    - apt-get update -yqq
+    - apt-get install git -yqq
+    - docker-php-ext-install pdo_mysql
+    - curl -sS https://getcomposer.org/installer | php
+    - php composer.phar install
 
 test:
   stage: test
