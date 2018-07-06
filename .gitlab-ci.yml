@@ -7,16 +7,13 @@ stages:
 
 cache:
   untracked: true
-
-before_script:
-    - apt-get update -yqq
-    - 'which git || ( apt-get install git -y )'
-
+  
 test:
   stage: test
   only:
     - master
   before_script:
+    - apt-get update -yqq
     - 'which unzip || (apt-get install zip unzip zlib1g-dev -y)'
     - docker-php-ext-install pdo_mysql
     - docker-php-ext-install zip
@@ -30,6 +27,7 @@ deploy:
   only:
     - master
   before_script:
+    - apt-get update -yqq
     - 'which ssh-agent || ( apt-get install openssh-client -y )'
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
