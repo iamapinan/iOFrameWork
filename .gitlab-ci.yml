@@ -10,7 +10,6 @@ cache:
 
 before_script:
     - apt-get update -yqq
-    - 'which unzip || (apt-get install zip unzip zlib1g-dev -y)'
     - 'which git || ( apt-get install git -y )'
 
 test:
@@ -18,6 +17,7 @@ test:
   only:
     - master
   before_script:
+    - 'which unzip || (apt-get install zip unzip zlib1g-dev -y)'
     - docker-php-ext-install pdo_mysql
     - docker-php-ext-install zip
     - curl -sS https://getcomposer.org/installer | php
