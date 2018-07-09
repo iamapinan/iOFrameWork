@@ -11,7 +11,7 @@ class Loader {
         /**
          * Load .env data to PHP Environment
          */
-        if(is_file(BASE_PATH . '.env')) {
+        if(file_exists(BASE_PATH . '.env')) {
             $dotenv = new \Dotenv\Dotenv(BASE_PATH);
             $dotenv->load();
         }
@@ -36,9 +36,9 @@ class Loader {
     }
 
     public static function version($int = false) {
-        
+
         exec('git rev-list HEAD | wc -l', $version_number);
-        exec('git log -1',$line);
+        
         $current_version = trim($version_number[0]);
         $div = (self::$versioncontrol == 'alpha' || self::$versioncontrol == 'beta') ? 1000 : 100; 
 
@@ -102,8 +102,12 @@ class Loader {
         /**
          * Load route config.
          */
-        require (BASE_PATH . 'routes/api.php');
-        require (BASE_PATH . 'routes/web.php');
+        if(file_exists(BASE_PATH . 'routes/web.php')) {
+            require (BASE_PATH . 'routes/web.php');
+        }
+        if(file_exists(BASE_PATH . 'routes/web.php')) {
+            require (BASE_PATH . 'routes/api.php');
+        }
 
         $route->end();
     }
