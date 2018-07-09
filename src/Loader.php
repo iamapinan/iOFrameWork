@@ -5,12 +5,13 @@ class Loader {
 
     protected $fnc;
     protected $cont;
+    protected static $versioncontrol = 'alpha';
 
     function __construct() {
         /**
          * Load .env data to PHP Environment
          */
-        if(is_file(BASE_PATH . '.env')) {
+        if(file_exists(BASE_PATH . '.env')) {
             $dotenv = new \Dotenv\Dotenv(BASE_PATH);
             $dotenv->load();
         }
@@ -28,6 +29,29 @@ class Loader {
 
         $this->fncs = $fnc;
         $this->cont = $const;
+    }
+
+    public static function system_version() {
+        return self::version();
+    }
+
+    public static function version($int = false) {
+
+        exec('git rev-list HEAD | wc -l', $version_number);
+        
+        $current_version = trim($version_number[0]);
+        $div = (self::$versioncontrol == 'alpha' || self::$versioncontrol == 'beta') ? 1000 : 100; 
+
+        if($int == false) {
+            $new_version = substr($current_version/$div, 0, 4);
+            $version['text'] = $new_version . ' ' . self::$versioncontrol;
+            $version['number'] = $new_version;
+            $version['type'] = self::$versioncontrol;
+        } else {
+            $version = substr($current_version/$div, 0, 4);
+        }
+
+        return $version;
     }
     
     /**
@@ -78,8 +102,12 @@ class Loader {
         /**
          * Load route config.
          */
-        require (BASE_PATH . 'routes/api.php');
-        require (BASE_PATH . 'routes/web.php');
+        if(file_exists(BASE_PATH . 'routes/web.php')) {
+            require (BASE_PATH . 'routes/web.php');
+        }
+        if(file_exists(BASE_PATH . 'routes/web.php')) {
+            require (BASE_PATH . 'routes/api.php');
+        }
 
         $route->end();
     }

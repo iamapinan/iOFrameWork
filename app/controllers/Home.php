@@ -7,6 +7,6 @@ class Home {
     }
 
     public function index() {
-        echo render('home');
+        echo render('home', ['page_title' => 'Welcome to I/O Framework']);
     }
 }

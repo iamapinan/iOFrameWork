@@ -3,7 +3,7 @@
 /* I/O Framework CLI menu
  *
  * (The MIT license)
- * Copyright (c) 2014 Rob Morgan
+ * Copyright (c) 2014 iOTech Enterprise
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated * documentation files (the "Software"), to
@@ -23,24 +23,52 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 use PhpSchool\CliMenu\CliMenu;
 use PhpSchool\CliMenu\CliMenuBuilder;
 use PhpSchool\CliMenu\MenuItem\AsciiArtItem;
+use IO\Framework\Loader;
+use IO\Framework\CLI\CacheCLI;
+use IO\Framework\CLI\AboutCLI;
 
+define('BASE_PATH', __DIR__ . '/');
 require_once('vendor/autoload.php');
+
+$version = Loader::version(true);
 
 $art = <<<ART
 
- ===   ======  
- =    =    =  I/O FRAMEWORK
- =    =    =  The fast MVC PHP framework build for everyone.
-===   ======
+###   ######  
+#    #    #  I/O FRAMEWORK: The fast MVC PHP framework build for everyone.
+#    #    #  version: $version
+###   ######  
 
 ART;
 
 $itemCallable = function (CliMenu $menu) {
     echo $menu->getSelectedItem()->getText() . ' is comming soon.';
 };
+
+$ClearCache = function (CliMenu $menu) {
+    $cacheman = new CacheCLI;
+    $cacheman->clear($menu);
+};
+
+$creditCall = function (CliMenu $menu) {
+    $credit = new AboutCLI;
+    $credit->credit($menu);
+};
+
+
+if($argv[1] != '') {
+    switch($argv[1]) {
+        case 'clearcache':
+            $cacheman = new CacheCLI;
+            $cacheman->clear();
+        break;
+    }
+    exit;
+}
 
 $menu = (new CliMenuBuilder)
     ->setTitle('I/O Framework CLI Menu')
@@ -73,10 +101,10 @@ $menu = (new CliMenuBuilder)
     ->addItem('Setup complete CMS', $itemCallable)
     ->addItem('Generate secrete key', $itemCallable)
     ->addItem('Set permission', $itemCallable)
-    ->addItem('Clear cache', $itemCallable)
+    ->addItem('Clear cache', $ClearCache)
     ->addLineBreak('-')
     ->addItem('[?] Help ', $itemCallable)
-    ->addItem('[*] Credits', $itemCallable)
+    ->addItem('[*] Credits', $creditCall)
     ->setWidth(100)
     ->setBackgroundColour('cyan')
     ->setForegroundColour('black')

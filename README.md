@@ -1,10 +1,11 @@
 ![frameworklogo](https://iotech.co.th/wp-content/uploads/2018/05/Framework-logo_Vertical-211x100.png)
 
-# I/O Framework 0.2 alpha
+# I/O Framework
 Easy to use and bug less mvc model framework but powerful to use. 
 
 ### Benefit
 - Easy to understand and code.
+- io command line interface for your fast job.
 - Included all minimum require to build some project.
 - MVC Model
 - Cacheable template

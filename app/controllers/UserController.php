@@ -10,8 +10,8 @@ class UserController {
 
     public function __construct() {
         $this->db = new MySQL;
-        $basic = new BasicAuthen;
-        $basic->Check();
+        // $basic = new BasicAuthen;
+        // $basic->Check();
     }
 
     public function userInfo($user_id) {
@@ -19,7 +19,7 @@ class UserController {
     }
 
     public function updateProfile() {
-        
+
     }
 
     public function changePassword() {

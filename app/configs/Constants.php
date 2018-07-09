@@ -4,9 +4,9 @@
  */
 $const = [
     'api_prefix' => '/api',
-    'template_dir' => BASE_PATH . 'templates/',
+    'template_dir' => BASE_PATH . 'templates',
     'default_database' => 'mysql',
-    'template_cache' => BASE_PATH . 'cache/view/',
+    'template_cache' => BASE_PATH . 'cache/view',
     'testCheck' => true
 ];
 
@@ -19,7 +19,9 @@ $fnc = [
     "req" => "all_request",
     "this" => "app_request",
     "json" => "to_json_respose",
-    "unsetArray" => "array_unset_recursive",
+    "unset_array" => "array_unset_recursive",
     "redirect" => "redirect_me",
+    "version" => "get_system_version_number",
+    "version_info" => "get_system_version"
 ];
 

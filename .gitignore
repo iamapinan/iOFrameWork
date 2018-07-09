@@ -16,6 +16,7 @@ npm-debug.log
 .config/
 .local/
 cache/view/*
+!cache/view
 
 
 ### Local ###
@@ -26,3 +27,4 @@ laradock/
 .cache
 phinx.yml
 nginx_conf/*
+.gitlab-ci.yml
