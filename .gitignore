@@ -15,6 +15,7 @@ npm-debug.log
 .config/
 .local/
 cache/view/*
+!cache/view
 
 
 ### Local ###

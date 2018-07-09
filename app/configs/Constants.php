@@ -4,9 +4,9 @@
  */
 $const = [
     'api_prefix' => '/api',
-    'template_dir' => BASE_PATH . 'templates/',
+    'template_dir' => BASE_PATH . 'templates',
     'default_database' => 'mysql',
-    'template_cache' => BASE_PATH . 'cache/view/',
+    'template_cache' => BASE_PATH . 'cache/view',
     'testCheck' => true
 ];
 
