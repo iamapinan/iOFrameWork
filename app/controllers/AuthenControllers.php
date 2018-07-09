@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 
-use \App\DbClient;
+use IO\Framework\Database\MySQL;
 use \App\MiddleWare\Authenticate;
 use \App\MiddleWare\BasicAuthen;
 
@@ -9,7 +9,7 @@ class AuthenControllers{
     private $obj = [];
 
     public function __construct() {
-        $this->db = new DbClient;
+        $this->db = new MySQL;
         $basic = new BasicAuthen;
         $basic->Check();
     }

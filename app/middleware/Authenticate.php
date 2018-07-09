@@ -1,7 +1,9 @@
 <?php
 namespace App\Middleware;
 
-class Authenticate extends \App\dbClient {
+use IO\Framework\Database\MySQL;
+
+class Authenticate extends MySQL {
 
     public function Authen($User, $Pass) {
         $SelectUser = $this->select(

@@ -1,4 +1,4 @@
-{include(file='header.tpl' site_name='I/O Framwork 0.2-alpha')}
+@include('header', ['page_title' => 'I/O Framwork 0.2-alpha'])
 <div class="container-fluid content-wrap" id="root">
     <div class="row align-items-center justify-content-center">
         <div class="col-12 align-self-center">
@@ -15,4 +15,4 @@
             </div>
     </div>
 </div>
-{include(file='footer.tpl')}
+@include('footer')

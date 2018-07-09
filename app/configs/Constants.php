@@ -7,7 +7,6 @@ $const = [
     'template_dir' => BASE_PATH . 'templates/',
     'default_database' => 'mysql',
     'template_cache' => BASE_PATH . 'cache/view/',
-    'keySize' => 8,
     'testCheck' => true
 ];
 
@@ -20,7 +19,7 @@ $fnc = [
     "req" => "all_request",
     "this" => "app_request",
     "json" => "to_json_respose",
-    "unsetArr" => "array_unset_recursive",
+    "unsetArray" => "array_unset_recursive",
     "redirect" => "redirect_me",
 ];
 
