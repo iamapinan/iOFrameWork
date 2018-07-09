@@ -5,6 +5,7 @@ class Loader {
 
     protected $fnc;
     protected $cont;
+    protected static $versioncontrol = 'alpha';
 
     function __construct() {
         /**
@@ -28,6 +29,27 @@ class Loader {
 
         $this->fncs = $fnc;
         $this->cont = $const;
+    }
+
+    public static function system_version() {
+        return self::version();
+    }
+
+    public static function version($int = false) {
+        exec('git rev-list HEAD | wc -l', $version_number);
+        exec('git log -1',$line);
+        $current_version = trim($version_number[0])*2;
+        
+        if($int == false) {
+            $new_version = substr($current_version/1000, 0, 4);
+            $version['text'] = $new_version . ' ' . self::$versioncontrol;
+            $version['number'] = $new_version;
+            $version['type'] = self::$versioncontrol;
+        } else {
+            $version = substr($current_version/1000, 0, 4);
+        }
+
+        return ['text' => trim($version_number[0])];
     }
     
     /**
