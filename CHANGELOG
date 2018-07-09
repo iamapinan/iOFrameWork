@@ -1,0 +1,5 @@
+# Changelogs 0.2 beta
+- Update home
+- Change loader class structure
+- Restructure folder and class
+- Add PHPUnit test case
