@@ -36,20 +36,22 @@ class Loader {
     }
 
     public static function version($int = false) {
+        
         exec('git rev-list HEAD | wc -l', $version_number);
         exec('git log -1',$line);
-        $current_version = trim($version_number[0])*2;
-        
+        $current_version = trim($version_number[0]);
+        $div = (self::$versioncontrol == 'alpha' || self::$versioncontrol == 'beta') ? 1000 : 100; 
+
         if($int == false) {
-            $new_version = substr($current_version/1000, 0, 4);
+            $new_version = substr($current_version/$div, 0, 4);
             $version['text'] = $new_version . ' ' . self::$versioncontrol;
             $version['number'] = $new_version;
             $version['type'] = self::$versioncontrol;
         } else {
-            $version = substr($current_version/1000, 0, 4);
+            $version = substr($current_version/$div, 0, 4);
         }
 
-        return ['text' => trim($version_number[0])];
+        return $version;
     }
     
     /**

@@ -10,8 +10,16 @@ function get_constant($n) {
 
 function page_render($view, $params = []) {
     $template = new Blade(getconst('template_dir'), getconst('template_cache'));
-    $params['framework_version'] = Loader::system_version();
+    $params['framework_version'] = Loader::version();
     return $template->make($view, $params);
+}
+
+function get_system_version_number() {
+    return Loader::version();
+}
+
+function get_system_version() {
+    return Loader::version(true);
 }
 
 function all_request($req) {

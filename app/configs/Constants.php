@@ -19,7 +19,9 @@ $fnc = [
     "req" => "all_request",
     "this" => "app_request",
     "json" => "to_json_respose",
-    "unsetArray" => "array_unset_recursive",
+    "unset_array" => "array_unset_recursive",
     "redirect" => "redirect_me",
+    "version" => "get_system_version_number",
+    "version_info" => "get_system_version"
 ];
 

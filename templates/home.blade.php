@@ -3,7 +3,7 @@
     <div class="row align-items-center justify-content-center">
         <div class="col-12 align-self-center">
             <div class="jumbotron text-center">
-                <img src="/assets/io-logo.png">
+                <img src="/assets/images/io-logo.png">
                 <h1>Welcome to I/O Framework</h1>
                 <subtitle> Version {{ $framework_version['text'] }}</subtitle>
                 <p align="center">

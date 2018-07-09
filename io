@@ -26,15 +26,18 @@
 use PhpSchool\CliMenu\CliMenu;
 use PhpSchool\CliMenu\CliMenuBuilder;
 use PhpSchool\CliMenu\MenuItem\AsciiArtItem;
+use IO\Framework\Loader;
 
 require_once('vendor/autoload.php');
 
+$version = Loader::version(true);
+
 $art = <<<ART
 
- ===   ======  
- =    =    =  I/O FRAMEWORK
- =    =    =  The fast MVC PHP framework build for everyone.
-===   ======
+###   ######  
+#    #    #  I/O FRAMEWORK: The fast MVC PHP framework build for everyone.
+#    #    #  version: $version
+###   ######  
 
 ART;
 
