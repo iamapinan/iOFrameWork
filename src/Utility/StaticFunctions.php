@@ -1,15 +1,14 @@
 <?php
 use Dwoo\Core;
-
+use Jenssegers\Blade\Blade;
 function get_constant($n) {
-    require ( BASE_PATH . 'app/Constants.php' );
+    require ( BASE_PATH . 'app/configs/Constants.php' );
     return $const[$n];
 }
 
 function page_render($view, $params = []) {
-    $template = new Core();
-    $template->setCompileDir(getconst('template_cache'));
-    return $template->get(getconst('template_dir') . $view, $params);
+    $template = new Blade(getconst('template_dir'), getconst('template_cache'));
+    return $template->make($view, $params);
 }
 
 function all_request($req) {

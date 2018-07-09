@@ -1,5 +1,5 @@
 <?php
-namespace iO\Framework;
+namespace IO\Framework;
 
 class Loader {
 
@@ -23,8 +23,8 @@ class Loader {
         /**
          * Load constant and utility
          */
-        require ( BASE_PATH . 'app/Constants.php' );
-        require ( BASE_PATH . 'app/Functions.php' );
+        require ( BASE_PATH . 'app/configs/Constants.php' );
+        require ( 'Utility/StaticFunctions.php' );
 
         $this->fncs = $fnc;
         $this->cont = $const;

@@ -24,6 +24,7 @@ test:
   stage: test
   only:
     - master
+    - develop
   script:
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install

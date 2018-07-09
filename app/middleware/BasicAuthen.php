@@ -1,7 +1,9 @@
 <?php
 namespace App\Middleware;
 
-class BasicAuthen extends \App\dbClient {
+use IO\Framework\Database\MySQL;
+
+class BasicAuthen extends MySQL {
 
     public function CheckHeader($User, $Pass) {
         $res = $this->select('basic_auth_app', ['name', 'secret'], ['appid' => $User] );

@@ -1,8 +1,8 @@
 <?php
-namespace App;
+namespace IO\Framework\Database;
 use Medoo\Medoo;
 
-class DbClient {
+class MySQL {
     var $connect = '';
     public function __construct() {
         $this->connect = new Medoo([
