@@ -24,7 +24,6 @@ test:
   stage: test
   only:
     - master
-    - develop
   script:
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
@@ -36,7 +35,7 @@ deploy:
     - master
   script:
     - ssh-add <(echo "$SSH_PRIV_KEY")
-    - rsync -azP --exclude .git --exclude .gitignore --exclude composer.lock --exclude composer.phar --exclude .gitlab-ci.yml --exclude .env --exclude vendor . root@$DEPLOY_HOST_B:$INSTALL_DIR
-    - ssh -p22 root@$DEPLOY_HOST_B "cd $INSTALL_DIR && composer install && composer update"
-    - ssh -p22 root@$DEPLOY_HOST_B "chmod 777 -R $INSTALL_DIR/cache"
-    - ssh -p22 root@$DEPLOY_HOST_B "chmod 777 -R $INSTALL_DIR/storage"
+    - rsync -azP --exclude .git --exclude .gitignore --exclude composer.lock --exclude composer.phar --exclude .gitlab-ci.yml --exclude .env --exclude vendor . iotech@$DEPLOY_HOST_B:$INSTALL_DIR
+    - ssh -p22 iotech@$DEPLOY_HOST_B "cd $INSTALL_DIR && composer install && composer update"
+    - ssh -p22 iotech@$DEPLOY_HOST_B "chmod 777 -R $INSTALL_DIR/cache"
+    - ssh -p22 iotech@$DEPLOY_HOST_B "chmod 777 -R $INSTALL_DIR/storage"
