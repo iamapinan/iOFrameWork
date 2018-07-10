@@ -1,7 +1,7 @@
 <?php
 namespace App\Middleware;
 
-use IO\Framework\Database\MySQL;
+use IOFramework\Database\MySQL;
 
 class Authenticate extends MySQL {
 

@@ -12,10 +12,10 @@ composer.phar
 #.gitlab-ci.yml
 node_modules/
 npm-debug.log
-.cache/view/*
+.cache/view/*.php
 .config/
 .local/
-cache/view/*
+cache/view/*.php
 !cache/view
 
 
