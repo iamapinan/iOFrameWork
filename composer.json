@@ -20,9 +20,6 @@
         }
     ],
     "license": "MIT",
-    "require": {
-        "iotech/ioframework": "^0.2.1"
-    },
     "require-dev": {
         "filp/whoops": "2.1.14"
     },
@@ -31,5 +28,8 @@
             "App\\": "app/",
             "\\": ""
         }
+    },
+    "require": {
+        "iotech/ioframework": "0.2.3"
     }
 }

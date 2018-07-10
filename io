@@ -66,12 +66,14 @@ if($argv[1] != '') {
             $cacheman = new CacheCLI;
             $cacheman->clear();
         break;
+        case 'db':
+        break;
     }
     exit;
 }
 
 $menu = (new CliMenuBuilder)
-    ->setTitle('I/O Framework CLI Menu')
+    ->setTitle('I/O Framework Command mode')
     ->addAsciiArt($art)
     ->setUnselectedMarker(' ')
     ->setSelectedMarker('⇢')
