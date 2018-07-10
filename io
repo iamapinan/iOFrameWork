@@ -27,9 +27,9 @@
 use PhpSchool\CliMenu\CliMenu;
 use PhpSchool\CliMenu\CliMenuBuilder;
 use PhpSchool\CliMenu\MenuItem\AsciiArtItem;
-use IO\Framework\Loader;
-use IO\Framework\CLI\CacheCLI;
-use IO\Framework\CLI\AboutCLI;
+use IOFramework\Loader;
+use IOFramework\CLI\CacheCLI;
+use IOFramework\CLI\AboutCLI;
 
 define('BASE_PATH', __DIR__ . '/');
 require_once('vendor/autoload.php');

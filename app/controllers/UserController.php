@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 
-use IO\Framework\Database\MySQL;
+use IOFramework\Database\MySQL;
 use \App\MiddleWare\BasicAuthen;
 use \App\MiddleWare\UploadFile;
 

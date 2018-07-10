@@ -22,6 +22,6 @@ require_once (BASE_PATH . 'vendor/autoload.php');
 /**
  * System load
  */
-$load = new IO\Framework\Loader;
+$load = new IOFramework\Loader;
 $load->registerFunction();
 $load->Route();
