@@ -8,7 +8,7 @@ composer.phar
 .env
 *.log
 phinx.yml
-.gitlab-ci.yml
+#.gitlab-ci.yml
 /node_modules/
 /.cache/view/*.php
 /.config/
