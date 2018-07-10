@@ -1,19 +1,18 @@
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
 body .container-fluid {
   height: 100%;
 }
 
-body .container-fluid p {
+body p {
   margin-top: 25px;
 }
 
 .content-wrap {
   background-color: #fff;
   padding-top: 30px;
-  font-family: 'Kanit', sans-serif;
-}
-
-.jumbotron {
-  background-color: transparent;
 }
 
 h1 {
