@@ -30,6 +30,6 @@
         }
     },
     "require": {
-        "iotech/ioframework": "0.2.3"
+        "iotech/ioframework": "dev-master"
     }
 }

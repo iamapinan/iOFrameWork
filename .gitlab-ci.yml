@@ -1,0 +1,41 @@
+# Select image from https://hub.docker.com/iamapinan/php-nginx-mongo
+image: iamapinan/php-nginx-mongo:1.3
+
+stages:
+  - test
+  - deploy
+
+cache:
+  untracked: true
+
+test:
+  stage: test
+  only:
+    - master
+  # before_script:
+  #   - apt-get update -yqq
+  #   - 'which git || ( apt-get install git -y )'
+  #   - 'which unzip || (apt-get install zip unzip zlib1g-dev -y)'
+  #   - docker-php-ext-install pdo_mysql
+  #   - docker-php-ext-install zip
+  script:
+    # - curl -sS https://getcomposer.org/installer | php
+    - composer install
+    - vendor/bin/phpunit --configuration phpunit.xml --colors=auto
+
+deploy:
+  stage: deploy
+  only:
+    - master
+  before_script:
+    - apk update
+    - apk add rsync openssh
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - ssh-add <(echo "$SSH_PRIV_KEY")
+    - rsync -azP --exclude .git --exclude .gitignore --exclude composer.lock --exclude vendor/ --exclude composer.phar --exclude .gitlab-ci.yml --exclude .env --exclude vendor . iotech@$DEPLOY_HOST_B:$INSTALL_DIR
+    - ssh -p22 iotech@$DEPLOY_HOST_B "cd $INSTALL_DIR && rm -fr vendor/ && composer install && composer update"
+    - ssh -p22 iotech@$DEPLOY_HOST_B "chmod 777 -R $INSTALL_DIR/cache"
+    - ssh -p22 iotech@$DEPLOY_HOST_B "chmod 777 -R $INSTALL_DIR/storage"
