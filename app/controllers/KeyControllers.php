@@ -14,10 +14,4 @@ class KeyControllers {
     public function getIndex() {
 
     }
-
-    public function generate($count) {
-        $endpoint = getconst('keygen') . "/generate?sw=".getenv('APP_NAME')."&client=".getenv('APP_NAME')."&count=$count&length=" . getconst('keySize');
-        $response = file_get_contents($endpoint);
-        return json_decode($response);
-    }
 }
