@@ -9,7 +9,7 @@ Easy to use and bug less mvc model framework but powerful to use.
 - Included all minimum require to build some project.
 - MVC Model
 - Cacheable template
-- Lean template structure and desing.
+- Lean template structure and design.
 
 ### Document
 - [Get Start]()
