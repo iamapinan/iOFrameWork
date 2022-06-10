@@ -29,6 +29,12 @@
             "\\": ""
         }
     },
+    "repositories": [
+        {
+            "url": "https://github.com/iamapinan/iOFrameWork-Library.git",
+            "type": "git"
+        }
+    ],
     "require": {
         "iotech/ioframework": "dev-master"
     }
